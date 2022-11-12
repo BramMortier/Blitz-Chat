@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        // project options
+        "outDir": "./dist/",
+        "removeComments": true,
+        "target": "ES6",
+
+        // Source Map
+        "sourceMap": true,
+        "sourceRoot": "/",
+
+        // Strict Checks
+        "alwaysStrict": true,
+        "allowUnreachableCode": false,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+
+        // Linter Checks
+        "noImplicitReturns": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedParameters": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules/**/*"]
+}
