@@ -1,0 +1,14 @@
+.page {
+    min-height: 100vh;
+    padding: var(--space-xl);
+    margin: 0 auto;
+    max-width: 26.5625rem;
+
+    &--hidden {
+        display: none;
+    }
+
+    &--no-padding {
+        padding: 0;
+    }
+}

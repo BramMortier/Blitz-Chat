@@ -60,6 +60,11 @@ p {
     font-size: var(--text-md);
 }
 
+.link {
+    font-weight: 600;
+    color: var(--col-secondary);
+}
+
 input {
     font-family: var(--secondary-font);
     color: var(--mid-gray);

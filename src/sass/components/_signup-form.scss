@@ -1,13 +1,14 @@
 .signup-form {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    min-height: 100%;
 
     &__input-group {
-        border-bottom: 1px solid var(--col-mid-gray);
+        border-bottom: 1px solid var(--col-light-gray);
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: var(--space-lg);
     }
 
     &__input {
@@ -21,5 +22,31 @@
         height: 20px;
         width: 20px;
         fill: var(--col-mid-gray);
+    }
+
+    #register-btn,
+    #login-btn {
+        margin: var(--space-xl) 0 var(--space-md) 0;
+    }
+
+    &__divider {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        margin-bottom: var(--space-md);
+
+        span {
+            height: 1px;
+            width: 100%;
+            background-color: var(--col-light-gray);
+        }
+    }
+
+    &__third-party-btns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--space-md);
+        margin-bottom: var(--space-xl);
     }
 }

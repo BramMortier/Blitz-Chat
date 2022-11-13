@@ -1,6 +1,7 @@
-.login {
+.login,
+.register {
     &__logo {
-        padding-inline: var(--space-xl);
+        padding-inline: var(--space-xxl);
         margin-bottom: var(--space-xxl);
     }
 }
