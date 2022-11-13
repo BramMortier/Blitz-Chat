@@ -16,7 +16,8 @@
     </head>
     <body>
         <main>
-            <section class="login container">
+            <!-- register pgae begin -->
+            <section class="register page page--hidden">
                 <div class="login__logo">
                     <img src="./images/logo-dark-bg.svg" alt="logo" />
                 </div>
@@ -31,8 +32,56 @@
                         <input class="signup-form__input" type="password" placeholder="Password" />
                         <img class="signup-form__input-icon" src="./images/icons/eye-closed.svg" alt="eye" />
                     </div>
+                    <button id="register-btn" class="btn btn--primary">Register</button>
+                    <div class="signup-form__divider">
+                        <span></span>
+                        <p>or</p>
+                        <span></span>
+                    </div>
+                    <div class="signup-form__third-party-btns">
+                        <button class="icon-btn">
+                            <img src="./images/icons/google.svg" alt="google" />
+                        </button>
+                        <button class="icon-btn">
+                            <img src="./images/icons/facebook.svg" alt="facebook" />
+                        </button>
+                        <button class="icon-btn">
+                            <img src="./images/icons/github.svg" alt="github" />
+                        </button>
+                    </div>
+                    <p>Already have an account? <span class="link">login here</span></p>
                 </form>
             </section>
+            <!-- register pgae end -->
+
+            <!-- login pgae begin -->
+            <section class="login page page--hidden">
+                <div class="login__logo">
+                    <img src="./images/logo-dark-bg.svg" alt="logo" />
+                </div>
+                <form class="signup-form" action="#">
+                    <div class="signup-form__input-group">
+                        <input class="signup-form__input" type="text" placeholder="E-mail" />
+                    </div>
+                    <div class="signup-form__input-group">
+                        <input class="signup-form__input" type="password" placeholder="Password" />
+                        <img class="signup-form__input-icon" src="./images/icons/eye-closed.svg" alt="eye" />
+                    </div>
+                    <button id="register-btn" class="btn btn--primary">Login</button>
+                    <p>Dont have an account? <span class="link">register here</span></p>
+                </form>
+            </section>
+            <!-- login pgae end -->
+            <!-- chatrooms page begin -->
+            <section class="chatrooms page page--no-padding">
+                <nav class="navigation">
+                    <div class="navigation__icon"></div>
+                    <div class="navigation__profile"></div>
+                    <div class="navigation__back-btn"></div>
+                    <div class="navigation__settings-btn"></div>
+                </nav>
+            </section>
+            <!-- chatrooms page end -->
         </main>
     </body>
 </html>
