@@ -1,0 +1,22 @@
+:root {
+    // main colors
+    --col-primary: hsl(28, 39%, 6%);
+    --col-secondary: hsl(48, 100%, 80%);
+
+    // grays
+    --col-dark-gray: hsl(0, 0%, 20%);
+    --col-mid-gray: hsl(0, 0%, 43%);
+    --col-light-gray: hsl(0, 0%, 79%);
+    --col-white: hsl(0, 0%, 100%);
+
+    // accent colors
+    --col-red: hsl(0, 100%, 78%);
+    --col-green: hsl(150, 76%, 77%);
+    --col-dark-blue: hsl(198, 59%, 73%);
+    --col-light-blue: hsl(185, 100%, 91%);
+    --col-dark-purple: hsl(270, 46%, 70%);
+    --col-mid-purple: hsl(290, 100%, 88%);
+    --col-light-purple: hsl(297, 73%, 94%);
+
+    --main-bg: var(--col-primary);
+}

@@ -1,0 +1,67 @@
+@use "../utils" as *;
+
+:root {
+    // fonts
+    --primary-font: "forma-djr-text", sans-serif;
+    --secondary-font: "kallisto", sans-serif;
+
+    // base values
+    --text-base-size: 1rem;
+
+    // typescale
+    --text-xs: calc(var(--text-base-size) * 0.75);
+    --text-sm: calc(var(--text-base-size) * 0.875);
+    --text-md: calc(var(--text-base-size));
+    --text-lg: calc(var(--text-base-size) * 1.5);
+    --text-xl: calc(var(--text-base-size) * 2);
+}
+
+body {
+    font-family: var(--primary-font);
+    font-size: var(--text-md);
+    color: var(--col-white);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--secondary-font);
+    margin-bottom: var(--space-xxs);
+}
+
+h1,
+.text-xl {
+    font-size: var(--text-xl);
+}
+
+h2,
+.text-lg {
+    font-size: var(--text-lg);
+}
+
+h3,
+.text-md {
+    font-size: var(--text-md);
+}
+
+h4,
+.text-sm {
+    font-size: var(--text-sm);
+}
+
+h5,
+.text-xs {
+    font-size: var(--text-xs);
+}
+
+p {
+    font-size: var(--text-md);
+}
+
+input {
+    font-family: var(--secondary-font);
+    color: var(--mid-gray);
+    font-size: var(--text-md);
+}

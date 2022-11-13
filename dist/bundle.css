@@ -1,30 +1,58 @@
 /*!************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/sass/style.scss ***!
   \************************************************************************************************************************************************************************************/
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 100%;
+@import url(https://use.typekit.net/phl0vkc.css);
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/sass/style.scss (1) ***!
+  \****************************************************************************************************************************************************************************************/
+@import url(https://use.typekit.net/phl0vkc.css);
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/sass/style.scss (2) ***!
+  \****************************************************************************************************************************************************************************************/
+:root {
+  --primary-font: "forma-djr-text", sans-serif;
+  --secondary-font: "kallisto", sans-serif;
+  --text-base-size: 1rem;
+  --text-xs: calc(var(--text-base-size) * 0.75);
+  --text-sm: calc(var(--text-base-size) * 0.875);
+  --text-md: calc(var(--text-base-size));
+  --text-lg: calc(var(--text-base-size) * 1.5);
+  --text-xl: calc(var(--text-base-size) * 2);
 }
 
-body {
-  min-height: 100vh;
+h1,
+.text-xl {
+  font-size: var(--text-xl);
 }
 
-ol,
-ul {
-  list-style: none;
+h2,
+.text-lg {
+  font-size: var(--text-lg);
 }
 
-image {
-  width: 100%;
+h3,
+.text-md {
+  font-size: var(--text-md);
 }
 
-a {
-  text-decoration: none;
+h4,
+.text-sm {
+  font-size: var(--text-sm);
+}
+
+h5,
+.text-xs {
+  font-size: var(--text-xs);
+}
+
+p {
+  font-size: var(--text-md);
+}
+
+@media (min-width: 425px) {
+  :root {
+    --text-base-size: 1.5rem;
+  }
 }
 
 /*# sourceMappingURL=bundle.css.map*/
