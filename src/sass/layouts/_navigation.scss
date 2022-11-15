@@ -1,0 +1,11 @@
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-xl) 0 var(--space-xl);
+    margin-bottom: var(--space-lg);
+
+    &__icon {
+        height: 25px;
+        width: 25px;
+    }
+}

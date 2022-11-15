@@ -16,6 +16,14 @@
     --text-xl: calc(var(--text-base-size) * 2);
 }
 
+.primary-font {
+    font-family: var(--primary-font);
+}
+
+.secondary-font {
+    font-family: var(--secondary-font);
+}
+
 body {
     font-family: var(--primary-font);
     font-size: var(--text-md);
@@ -58,6 +66,18 @@ h5,
 
 p {
     font-size: var(--text-md);
+}
+
+.subtle {
+    color: var(--col-mid-gray);
+}
+
+.extra-subtle {
+    color: var(--col-light-gray);
+}
+
+.bold {
+    font-weight: 600;
 }
 
 .link {

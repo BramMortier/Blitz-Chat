@@ -1,0 +1,56 @@
+.chatrooms {
+    display: flex;
+    flex-direction: column;
+
+    &__welcome-message {
+        padding-inline: var(--space-xl);
+        margin-bottom: var(--space-sm);
+    }
+
+    &__chat-list {
+        background-color: var(--col-white);
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        padding: var(--space-lg);
+        min-height: 100px;
+        flex: 1;
+
+        &:last-child {
+            border: none;
+        }
+    }
+
+    &__chat {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-md);
+        padding-block: var(--space-md);
+        border-bottom: 1px solid var(--col-light-gray);
+    }
+
+    &__icon-placeholder {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        background-color: var(--col-secondary);
+    }
+
+    &__chat-info {
+        display: flex;
+        height: 3rem;
+        flex-direction: column;
+        justify-content: space-between;
+
+        h4 {
+            color: var(--col-dark-gray);
+        }
+    }
+
+    &__chat-status {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        height: 2.5rem;
+    }
+}
