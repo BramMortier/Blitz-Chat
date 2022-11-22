@@ -85,6 +85,10 @@ p {
     color: var(--col-secondary);
 }
 
+.text-inverted {
+    color: var(--col-dark-gray);
+}
+
 input {
     font-family: var(--secondary-font);
     color: var(--mid-gray);

@@ -1,0 +1,11 @@
+.container {
+    padding: var(--space-lg) var(--space-xl);
+}
+
+.container-inline {
+    padding-inline: var(--space-xl);
+}
+
+.container-block {
+    padding-block: var(--space-lg);
+}

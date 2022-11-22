@@ -21,3 +21,21 @@
     width: 50px;
     height: 50px;
 }
+
+.create-btn {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+
+    &__icon {
+        width: 3.5rem;
+    }
+
+    h4 {
+        color: var(--col-dark-gray);
+        font-size: var(--text-lg);
+    }
+}
