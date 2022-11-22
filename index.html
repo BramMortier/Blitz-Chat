@@ -164,13 +164,22 @@
             <!-- chatrooms page end -->
 
             <!-- chat page begin -->
-            <section class="chat page page--no-padding">
+            <section class="chat page page--hidden page--no-padding">
                 <nav class="navigation">
-                    <button class="icon-btn icon-btn--small-icon">
+                    <button class="icon-btn icon-btn--small">
                         <img src="./images/icons/back.svg" alt="back button" />
                     </button>
-                    <button class="icon-btn">
-                        <img src="./images/icons/profile.svg" alt="profile" />
+                    <div class="navigation__room-info">
+                        <div class="navigation__room-icon">
+                            <div class="navigation__icon-placeholder"></div>
+                        </div>
+                        <div class="navigation__general-info">
+                            <h4 class="primary-font">The boyyss</h4>
+                            <p class="subtle bold">(<span id="chatroom-active-users">3</span>) active users</p>
+                        </div>
+                    </div>
+                    <button class="icon-btn icon-btn--medium">
+                        <img src="./images/icons/settings.svg" alt="chat settings" />
                     </button>
                 </nav>
                 <div class="chat__messages-list container">
@@ -193,10 +202,39 @@
                             <p class="chat__message-timestamp extra-subtle">16u 13</p>
                         </li>
                     </ul>
-                    <div class="chat__message-input"></div>
+                    <form class="chat__message-input">
+                        <input class="primary-font" type="text" name="message" placeholder="Message..." />
+                        <button class="icon-btn icon-btn--blue icon-btn--medium" type="submit">
+                            <img src="./images/icons/send.svg" alt="send message button" />
+                        </button>
+                    </form>
                 </div>
             </section>
             <!-- chat page end -->
+
+            <!-- create chat page begin -->
+            <section class="create-chat page page--no-padding">
+                <nav class="navigation">
+                    <button class="icon-btn icon-btn--small">
+                        <img src="./images/icons/back.svg" alt="back button" />
+                    </button>
+                    <button class="icon-btn">
+                        <img src="./images/icons/profile.svg" alt="profile" />
+                    </button>
+                </nav>
+                <div class="create-chat__settings container">
+                    <form>
+                        <div class="signup-form__input-group">
+                            <input class="signup-form__input" type="text" placeholder="Groupname" />
+                        </div>
+                        <div class="signup-form__input-group">
+                            <input class="signup-form__input" type="text" placeholder="Description" />
+                        </div>
+                        <button class="btn btn--primary">Create chat</button>
+                    </form>
+                </div>
+            </section>
+            <!-- create chat page end -->
         </main>
     </body>
 </html>
