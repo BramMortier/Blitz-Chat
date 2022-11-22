@@ -68,9 +68,9 @@
 
     &__create-chat {
         position: relative;
-        width: 100%;
-        position: absolute;
         bottom: 0;
+        max-width: 26.5625rem;
+        width: 100%;
         z-index: 999;
         background-color: var(--col-white);
 
