@@ -1,10 +1,16 @@
+@use "../utils" as *;
+
 .chatrooms {
     display: flex;
     flex-direction: column;
 
     &__welcome-message {
-        padding-inline: var(--space-xl);
+        padding-inline: var(--space-md);
         margin-bottom: var(--space-sm);
+
+        @include breakpoint(sm) {
+            padding-inline: var(--space-xl);
+        }
     }
 
     &__chat-list {

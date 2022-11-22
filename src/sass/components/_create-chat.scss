@@ -1,0 +1,15 @@
+.create-chat {
+    display: flex;
+    flex-direction: column;
+
+    &__settings {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        background-color: var(--col-white);
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        overflow-y: scroll;
+        flex: 1;
+    }
+}

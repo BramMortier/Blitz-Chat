@@ -35,6 +35,10 @@
         gap: var(--space-md);
         margin-bottom: var(--space-md);
 
+        p {
+            color: var(--col-white);
+        }
+
         span {
             height: 1px;
             width: 100%;

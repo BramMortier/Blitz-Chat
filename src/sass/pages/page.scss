@@ -1,8 +1,14 @@
+@use "../utils" as *;
+
 .page {
     height: 100vh;
-    padding: var(--space-xl);
+    padding: var(--space-md);
     margin: 0 auto;
     max-width: 26.5625rem;
+
+    @include breakpoint(sm) {
+        padding: var(--space-xl);
+    }
 
     &--hidden {
         display: none;

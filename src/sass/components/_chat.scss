@@ -24,6 +24,7 @@
     &__messages {
         display: flex;
         flex-direction: column;
+        flex: 1;
         align-items: flex-start;
         gap: var(--space-md);
         width: 100%;
@@ -53,5 +54,28 @@
 
     &__message-timestamp {
         font-size: var(--text-xs);
+    }
+
+    &__message-input {
+        background-color: var(--col-offwhite);
+        padding: var(--space-xs);
+        border-radius: 3.125rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        margin-left: var(--space-md);
+        flex: 1;
+        width: 100%;
+
+        &::placeholder {
+            color: var(--col-light-gray);
+            font-weight: 500;
+        }
     }
 }
