@@ -49,4 +49,8 @@
         gap: var(--space-md);
         margin-bottom: var(--space-xl);
     }
+
+    & > p {
+        color: var(--col-white);
+    }
 }

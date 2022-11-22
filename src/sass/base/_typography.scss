@@ -66,6 +66,7 @@ h5,
 
 p {
     font-size: var(--text-md);
+    color: var(--col-dark-gray);
 }
 
 .subtle {
@@ -87,6 +88,15 @@ p {
 
 .text-inverted {
     color: var(--col-dark-gray);
+}
+
+.chip {
+    padding: var(--space-xs) var(--space-xl);
+    background-color: var(--col-light-purple);
+    color: var(--col-dark-purple);
+    border-radius: 2rem;
+    margin: 0 auto;
+    font-size: var(--text-sm);
 }
 
 input {
