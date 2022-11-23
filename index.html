@@ -17,7 +17,7 @@
     <body>
         <main>
             <!-- register pgae begin -->
-            <section class="register page page--hidden">
+            <section id="register-page" class="register page">
                 <div class="login__logo">
                     <img src="./images/logo-dark-bg.svg" alt="logo" />
                 </div>
@@ -55,7 +55,7 @@
             <!-- register pgae end -->
 
             <!-- login pgae begin -->
-            <section class="login page page--hidden">
+            <section id="login-page" class="login page page--hidden">
                 <div class="login__logo">
                     <img src="./images/logo-dark-bg.svg" alt="logo" />
                 </div>
@@ -67,14 +67,14 @@
                         <input class="signup-form__input" type="password" placeholder="Password" />
                         <img class="signup-form__input-icon" src="./images/icons/eye-closed.svg" alt="eye" />
                     </div>
-                    <button id="register-btn" class="btn btn--primary">Login</button>
+                    <button id="login-btn" class="btn btn--primary">Login</button>
                     <p>Dont have an account? <span class="link">register here</span></p>
                 </form>
             </section>
             <!-- login pgae end -->
 
             <!-- chatrooms page begin -->
-            <section class="chatrooms page page--hidden page--no-padding">
+            <section id="chatrooms-page" class="chatrooms page page--hidden page--no-padding">
                 <nav class="navigation">
                     <div class="navigation__icon">
                         <img src="./images/logo-icon.svg" alt="" />
@@ -87,7 +87,7 @@
                     <p class="subtle bold text-sm">Welcom Bram!</p>
                     <h1>Chatrooms</h1>
                 </div>
-                <ul class="chatrooms__chat-list container">
+                <ul id="chatrooms-list" class="chatrooms__chat-list container">
                     <li class="chatrooms__chat">
                         <div class="chatrooms__chat-icon">
                             <div class="chatrooms__icon-placeholder"></div>
@@ -164,7 +164,7 @@
             <!-- chatrooms page end -->
 
             <!-- chat page begin -->
-            <section class="chat page page--hidden page--no-padding">
+            <section id="chat-page" class="chat page page--hidden page--no-padding">
                 <nav class="navigation">
                     <button class="icon-btn icon-btn--small">
                         <img src="./images/icons/back.svg" alt="back button" />
@@ -213,7 +213,7 @@
             <!-- chat page end -->
 
             <!-- create chat page begin -->
-            <section class="create-chat page page--no-padding">
+            <section id="create-chat-page" class="create-chat page page--hidden page--no-padding">
                 <nav class="navigation">
                     <button class="icon-btn icon-btn--small">
                         <img src="./images/icons/back.svg" alt="back button" />
@@ -222,17 +222,29 @@
                         <img src="./images/icons/profile.svg" alt="profile" />
                     </button>
                 </nav>
-                <div class="create-chat__settings container">
-                    <form>
+                <form class="create-chat__settings container">
+                    <fieldset class="create-chat__general-settings">
+                        <legend>General info</legend>
                         <div class="signup-form__input-group">
-                            <input class="signup-form__input" type="text" placeholder="Groupname" />
+                            <input class="signup-form__input" type="text" name="groupname" placeholder="Groupname" />
                         </div>
                         <div class="signup-form__input-group">
-                            <input class="signup-form__input" type="text" placeholder="Description" />
+                            <input class="signup-form__input" type="text" name="description" placeholder="Description" />
                         </div>
-                        <button class="btn btn--primary">Create chat</button>
-                    </form>
-                </div>
+                    </fieldset>
+                    <fieldset class="create-chat__theme">
+                        <legend>Color theme</legend>
+                        <input type="radio" name="theme" value="yellow" />
+                        <input type="radio" name="theme" value="red" />
+                        <input type="radio" name="theme" value="green" />
+                        <input type="radio" name="theme" value="purple" />
+                    </fieldset>
+                    <fieldset class="create-chat__icon">
+                        <legend>Group icon</legend>
+                        <p class="extra-subtle">Todo</p>
+                    </fieldset>
+                    <button class="btn btn--primary">Create chat</button>
+                </form>
             </section>
             <!-- create chat page end -->
         </main>
