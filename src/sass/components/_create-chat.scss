@@ -11,5 +11,71 @@
         border-top-right-radius: 1.5rem;
         overflow-y: scroll;
         flex: 1;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    &__theme {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+
+        &:nth-child(1) {
+            opacity: 0.5;
+        }
+
+        input {
+            display: grid;
+            place-items: center;
+            position: relative;
+            appearance: none;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+
+            &:nth-child(3)::before {
+                background-color: var(--col-red);
+            }
+
+            &:nth-child(4)::before {
+                background-color: var(--col-green);
+            }
+
+            &:nth-child(5)::before {
+                background-color: var(--col-mid-purple);
+            }
+
+            &:checked {
+                border: 1px solid var(--col-mid-gray);
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                border-radius: 50%;
+                width: 90%;
+                height: 90%;
+                background-color: var(--col-secondary);
+            }
+        }
+    }
+
+    &__icon {
+        flex: 1;
+    }
+
+    fieldset {
+        border: none;
+        outline: none;
+        margin-bottom: var(--space-md);
+
+        legend {
+            font-size: var(--text-md);
+            color: var(--col-mid-gray);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
     }
 }

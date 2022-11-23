@@ -4,6 +4,7 @@
         "outDir": "./dist/",
         "removeComments": true,
         "target": "ES6",
+        "moduleResolution": "node",
 
         // Source Map
         "sourceMap": true,
