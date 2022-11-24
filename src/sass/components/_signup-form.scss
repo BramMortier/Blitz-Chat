@@ -1,7 +1,6 @@
 .signup-form {
     display: flex;
     flex-direction: column;
-    min-height: 100%;
 
     &__input-group {
         border-bottom: 1px solid var(--col-light-gray);
