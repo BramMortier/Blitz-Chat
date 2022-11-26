@@ -8,6 +8,9 @@ module.exports = {
         publicPath: "",
         filename: "bundle.js",
     },
+    resolve: {
+        extensions: [".ts", ".js"],
+    },
     devServer: {
         port: 8080,
         static: {
