@@ -155,7 +155,7 @@
                     </li>
                 </ul>
                 <div class="chatrooms__create-chat container">
-                    <button class="create-btn">
+                    <button id="create-chat-btn" class="create-btn">
                         <img class="create-btn__icon" src="./images/icons/add.svg" alt="create chat" />
                         <h4 class="primary-font">Create chat</h4>
                     </button>
@@ -166,7 +166,7 @@
             <!-- chat page begin -->
             <section id="chat-page" class="chat page page--hidden page--no-padding">
                 <nav class="navigation">
-                    <button class="icon-btn icon-btn--small">
+                    <button class="icon-btn icon-btn--small back-btn">
                         <img src="./images/icons/back.svg" alt="back button" />
                     </button>
                     <div class="navigation__room-info">
@@ -215,7 +215,7 @@
             <!-- create chat page begin -->
             <section id="create-chat-page" class="create-chat page page--hidden page--no-padding">
                 <nav class="navigation">
-                    <button class="icon-btn icon-btn--small">
+                    <button class="icon-btn icon-btn--small back-btn">
                         <img src="./images/icons/back.svg" alt="back button" />
                     </button>
                     <button class="icon-btn">
@@ -243,7 +243,7 @@
                         <legend>Group icon</legend>
                         <p class="extra-subtle">Todo</p>
                     </fieldset>
-                    <button class="btn btn--primary">Create chat</button>
+                    <button id="complete-create-chat-btn" class="btn btn--primary">Create chat</button>
                 </form>
             </section>
             <!-- create chat page end -->

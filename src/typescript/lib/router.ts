@@ -1,6 +1,18 @@
 // ------------------------------------------- //
 // module imports
-import { registerBtn, loginBtn, loginPage, chatPage, chatroomsPage, chatrooms, pages } from "./constants";
+import {
+    registerBtn,
+    loginBtn,
+    backBtns,
+    createChatBtn,
+    completeCreateChatBtn,
+    loginPage,
+    chatPage,
+    chatroomsPage,
+    chatrooms,
+    pages,
+    createChatPage,
+} from "./constants";
 // ------------------------------------------- //
 
 export class Router {
@@ -25,9 +37,23 @@ export class Navigation extends Router {
             this.navigate(chatroomsPage);
         });
 
+        createChatBtn?.addEventListener("click", () => {
+            this.navigate(createChatPage);
+        });
+
+        completeCreateChatBtn?.addEventListener("click", () => {
+            this.navigate(chatroomsPage);
+        });
+
         chatrooms.map((chatroom: Element | null) => {
             chatroom?.addEventListener("click", () => {
                 this.navigate(chatPage);
+            });
+        });
+
+        backBtns.map((backBtn: Element | null) => {
+            backBtn?.addEventListener("click", () => {
+                this.navigate(chatroomsPage);
             });
         });
     }

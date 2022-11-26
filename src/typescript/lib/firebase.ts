@@ -2,6 +2,7 @@
 // module imports
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { Analytics, getAnalytics } from "firebase/analytics";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 // ------------------------------------------- //
 
 export class Firebase {
@@ -14,6 +15,12 @@ export class Firebase {
         appId: "1:909983333760:web:be045f1d22c5d9378ed565",
         measurementId: "G-8VW8H07175",
     };
-    app: FirebaseApp = initializeApp(this.firebaseConfig);
-    analytics: Analytics = getAnalytics(this.app);
+    public app: FirebaseApp = initializeApp(this.firebaseConfig);
+    public analytics: Analytics = getAnalytics(this.app);
+}
+
+export class Authentication extends Firebase {
+    constructor() {
+        super();
+    }
 }
