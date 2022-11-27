@@ -3,11 +3,18 @@
     flex-direction: column;
 
     &__input-group {
-        border-bottom: 1px solid var(--col-light-gray);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         margin-bottom: var(--space-lg);
+
+        div {
+            border-bottom: 1px solid var(--col-light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        span {
+            // display: none;
+        }
     }
 
     &__input {

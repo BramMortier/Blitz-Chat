@@ -69,6 +69,11 @@ p {
     color: var(--col-dark-gray);
 }
 
+.error {
+    color: var(--col-red);
+    font-size: var(--text-sm);
+}
+
 .subtle {
     color: var(--col-mid-gray);
 }

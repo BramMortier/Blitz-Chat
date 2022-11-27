@@ -1,15 +1,10 @@
 // ------------------------------------------- //
 // module imports
-import { Navigation } from "./lib/router";
-import { Firebase } from "./lib/firebase";
+import { initEvents } from "./lib/events";
+import { getChatrooms } from "./lib/chatrooms";
 // ------------------------------------------- //
 
-export class App {
-    constructor() {
-        // init app navigation
-        let navigation: Navigation = new Navigation();
-
-        // init firebase auth & db
-        let firebase: Firebase = new Firebase();
-    }
-}
+export const app = () => {
+    getChatrooms();
+    initEvents();
+};

@@ -21,18 +21,28 @@
                 <div class="login__logo">
                     <img src="./images/logo-dark-bg.svg" alt="logo" />
                 </div>
-                <form class="signup-form" action="#">
+                <form id="register-form" class="signup-form">
+                    <span id="register-form-err" class="error"></span>
                     <div class="signup-form__input-group">
-                        <input class="signup-form__input" type="text" placeholder="Name" />
+                        <span id="register-name-err" class="error"></span>
+                        <div>
+                            <input id="register-name" class="signup-form__input" type="text" placeholder="Name" />
+                        </div>
                     </div>
                     <div class="signup-form__input-group">
-                        <input class="signup-form__input" type="text" placeholder="E-mail" />
+                        <span id="register-email-err" class="error"></span>
+                        <div>
+                            <input id="register-email" class="signup-form__input" type="text" placeholder="E-mail" />
+                        </div>
                     </div>
                     <div class="signup-form__input-group">
-                        <input class="signup-form__input" type="password" placeholder="Password" />
-                        <img class="signup-form__input-icon" src="./images/icons/eye-closed.svg" alt="eye" />
+                        <span id="register-password-err" class="error"></span>
+                        <div>
+                            <input id="register-password" class="signup-form__input" type="password" placeholder="Password" />
+                            <img class="signup-form__input-icon" src="./images/icons/eye-closed.svg" alt="eye" />
+                        </div>
                     </div>
-                    <button id="register-btn" class="btn btn--primary">Register</button>
+                    <button type="submit" id="register-btn" class="btn btn--primary">Register</button>
                     <div class="signup-form__divider">
                         <span></span>
                         <p>or</p>
@@ -49,7 +59,7 @@
                             <img src="./images/icons/github.svg" alt="github" />
                         </button>
                     </div>
-                    <p>Already have an account? <span class="link">login here</span></p>
+                    <p>Already have an account? <span id="login-link" class="link">login here</span></p>
                 </form>
             </section>
             <!-- register pgae end -->
@@ -59,16 +69,22 @@
                 <div class="login__logo">
                     <img src="./images/logo-dark-bg.svg" alt="logo" />
                 </div>
-                <form class="signup-form" action="#">
+                <form id="login-form" class="signup-form" action="#">
                     <div class="signup-form__input-group">
-                        <input class="signup-form__input" type="text" placeholder="E-mail" />
+                        <span id="login-email-err" class="error"></span>
+                        <div>
+                            <input id="login-email" class="signup-form__input" type="text" placeholder="E-mail" />
+                        </div>
                     </div>
                     <div class="signup-form__input-group">
-                        <input class="signup-form__input" type="password" placeholder="Password" />
-                        <img class="signup-form__input-icon" src="./images/icons/eye-closed.svg" alt="eye" />
+                        <span id="login-password-err" class="error"></span>
+                        <div>
+                            <input id="login-password" class="signup-form__input" type="password" placeholder="Password" />
+                            <img class="signup-form__input-icon" src="./images/icons/eye-closed.svg" alt="eye" />
+                        </div>
                     </div>
                     <button id="login-btn" class="btn btn--primary">Login</button>
-                    <p>Dont have an account? <span class="link">register here</span></p>
+                    <p>Dont have an account? <span id="register-link" class="link">register here</span></p>
                 </form>
             </section>
             <!-- login pgae end -->
@@ -226,10 +242,14 @@
                     <fieldset class="create-chat__general-settings">
                         <legend>General info</legend>
                         <div class="signup-form__input-group">
-                            <input class="signup-form__input" type="text" name="groupname" placeholder="Groupname" />
+                            <div>
+                                <input class="signup-form__input" type="text" name="groupname" placeholder="Groupname" />
+                            </div>
                         </div>
                         <div class="signup-form__input-group">
-                            <input class="signup-form__input" type="text" name="description" placeholder="Description" />
+                            <div>
+                                <input class="signup-form__input" type="text" name="description" placeholder="Description" />
+                            </div>
                         </div>
                     </fieldset>
                     <fieldset class="create-chat__theme">
