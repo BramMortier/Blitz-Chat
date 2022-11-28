@@ -32397,16 +32397,213 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "app": () => (/* binding */ app)
+/* harmony export */   "initApp": () => (/* binding */ initApp)
 /* harmony export */ });
-/* harmony import */ var _lib_events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/events */ "./src/typescript/lib/events.ts");
-/* harmony import */ var _lib_chatrooms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/chatrooms */ "./src/typescript/lib/chatrooms.ts");
+/* harmony import */ var _firebase_database__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firebase/database */ "./src/typescript/firebase/database.ts");
+/* harmony import */ var _lib_events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/events */ "./src/typescript/lib/events.ts");
 
 
-const app = () => {
-    (0,_lib_chatrooms__WEBPACK_IMPORTED_MODULE_1__.getChatrooms)();
-    (0,_lib_events__WEBPACK_IMPORTED_MODULE_0__.initEvents)();
+const initApp = () => {
+    (0,_firebase_database__WEBPACK_IMPORTED_MODULE_0__.getChatrooms)();
 };
+
+
+/***/ }),
+
+/***/ "./src/typescript/firebase/auth.ts":
+/*!*****************************************!*\
+  !*** ./src/typescript/firebase/auth.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "auth": () => (/* binding */ auth),
+/* harmony export */   "login": () => (/* binding */ login),
+/* harmony export */   "logout": () => (/* binding */ logout),
+/* harmony export */   "register": () => (/* binding */ register)
+/* harmony export */ });
+/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
+/* harmony import */ var _lib_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/router */ "./src/typescript/lib/router.ts");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/constants */ "./src/typescript/lib/constants.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)();
+const register = (e) => __awaiter(void 0, void 0, void 0, function* () {
+    e.preventDefault();
+    let errorList = [];
+    let name = "";
+    let email = "";
+    let password = "";
+    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerName === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerName === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerName.value) {
+        name = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerName.value;
+    }
+    else {
+        errorList.push("name error");
+        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerNameErr !== null)
+            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerNameErr.innerHTML = "please fill in your name";
+    }
+    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmail === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmail === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmail.value) {
+        email = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmail.value;
+    }
+    else {
+        errorList.push("email error");
+        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmailErr !== null)
+            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmailErr.innerHTML = "please fill in your e-mail";
+    }
+    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPassword === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPassword === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPassword.value) {
+        password = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPassword.value;
+    }
+    else {
+        errorList.push("password error");
+        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPasswordErr !== null)
+            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPasswordErr.innerHTML = "please fill in a password";
+    }
+    if (errorList.length == 0) {
+        try {
+            let userCredential = yield (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.createUserWithEmailAndPassword)(auth, email, password);
+            console.log(userCredential);
+            if (userCredential) {
+                (0,_lib_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPage);
+            }
+        }
+        catch (error) {
+            if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerFormErr !== null)
+                _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerFormErr.innerHTML = "An account with this email already exists";
+            console.error(`code: ${error.code} error: ${error.message}`);
+        }
+    }
+});
+const login = (e) => __awaiter(void 0, void 0, void 0, function* () {
+    e.preventDefault();
+    let errorList = [];
+    let email = "";
+    let password = "";
+    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmail === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmail === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmail.value) {
+        email = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmail.value;
+    }
+    else {
+        errorList.push("email error");
+        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmailErr !== null)
+            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmailErr.innerHTML = "please fill in your e-mail";
+    }
+    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPassword === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPassword === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPassword.value) {
+        password = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPassword.value;
+    }
+    else {
+        errorList.push("password error");
+        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPasswordErr !== null)
+            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPasswordErr.innerHTML = "please fill in a password";
+    }
+    if (errorList.length == 0) {
+        try {
+            let userCredential = yield (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithEmailAndPassword)(auth, email, password);
+            if (userCredential) {
+                (0,_lib_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_2__.chatroomsPage);
+            }
+        }
+        catch (error) {
+            if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginFormErr !== null)
+                _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginFormErr.innerHTML = "Wrong email password combination";
+            console.error(`code: ${error.code} error: ${error.message}`);
+        }
+    }
+});
+auth.onAuthStateChanged((user) => {
+    console.log(user);
+});
+const logout = () => {
+    console.log("signing out...");
+    auth.signOut();
+    (0,_lib_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPage);
+};
+
+
+/***/ }),
+
+/***/ "./src/typescript/firebase/database.ts":
+/*!*********************************************!*\
+  !*** ./src/typescript/firebase/database.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "db": () => (/* binding */ db),
+/* harmony export */   "getChatrooms": () => (/* binding */ getChatrooms),
+/* harmony export */   "getMessages": () => (/* binding */ getMessages)
+/* harmony export */ });
+/* harmony import */ var _firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firebase */ "./src/typescript/firebase/firebase.ts");
+/* harmony import */ var _lib_chatrooms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/chatrooms */ "./src/typescript/lib/chatrooms.ts");
+/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ "./node_modules/firebase/firestore/dist/index.esm.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(_firebase__WEBPACK_IMPORTED_MODULE_0__.firebaseApp);
+const getChatrooms = () => __awaiter(void 0, void 0, void 0, function* () {
+    let ref = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, "chatrooms");
+    const chatrooms = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(ref);
+    chatrooms.forEach((chatroom) => {
+        console.log(chatroom.id, "=>", chatroom.data());
+        (0,_lib_chatrooms__WEBPACK_IMPORTED_MODULE_1__.renderChatroom)(chatroom.data());
+    });
+});
+const getMessages = (chatroomId) => __awaiter(void 0, void 0, void 0, function* () {
+    let ref = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, "messages"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)("chatroomId", "==", chatroomId));
+    const messages = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(ref);
+    messages.forEach((message) => {
+        console.log(message.id, "=>", message.data());
+    });
+});
+
+
+/***/ }),
+
+/***/ "./src/typescript/firebase/firebase.ts":
+/*!*********************************************!*\
+  !*** ./src/typescript/firebase/firebase.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "analytics": () => (/* binding */ analytics),
+/* harmony export */   "firebaseApp": () => (/* binding */ firebaseApp)
+/* harmony export */ });
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.esm.js");
+/* harmony import */ var firebase_analytics__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/analytics */ "./node_modules/firebase/analytics/dist/index.esm.js");
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAfLyWlU3BMjia7qU9-qYDGGMuuPEBtFqU",
+    authDomain: "blitz-chat-d6dc9.firebaseapp.com",
+    projectId: "blitz-chat-d6dc9",
+    storageBucket: "blitz-chat-d6dc9.appspot.com",
+    messagingSenderId: "909983333760",
+    appId: "1:909983333760:web:be045f1d22c5d9378ed565",
+    measurementId: "G-8VW8H07175",
+};
+const firebaseApp = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);
+const analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_1__.getAnalytics)(firebaseApp);
 
 
 /***/ }),
@@ -32419,37 +32616,33 @@ const app = () => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getChatrooms": () => (/* binding */ getChatrooms),
-/* harmony export */   "getMessages": () => (/* binding */ getMessages)
+/* harmony export */   "renderChatroom": () => (/* binding */ renderChatroom)
 /* harmony export */ });
-/* harmony import */ var _firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firebase */ "./src/typescript/lib/firebase.ts");
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ "./node_modules/firebase/firestore/dist/index.esm.js");
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./src/typescript/lib/constants.ts");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./src/typescript/lib/router.ts");
+
+
+const renderChatroom = (data) => {
+    let chatroomEl = document.createElement("li");
+    chatroomEl.classList.add("chatrooms__chat");
+    chatroomEl.innerHTML = `
+        <div class="chatrooms__chat-icon">
+            <div class="chatrooms__icon-placeholder"></div>
+        </div>
+        <div class="chatrooms__chat-info">
+            <h4 class="primary-font text-inverted">${data.name}</h4>
+            <p class="extra-subtle bold text-xs">${data.lastMessage}</p>
+        </div>
+        <div class="chatrooms__chat-status">
+            <p class="extra-subtle bold text-xs">${data.timeOfLastMessage}</p>
+            <img src="./images/icons/check.svg" alt="status icon" />
+        </div>
+    `;
+    chatroomEl === null || chatroomEl === void 0 ? void 0 : chatroomEl.addEventListener("click", () => {
+        (0,_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.chatPage);
     });
+    _constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsList === null || _constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsList === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsList.appendChild(chatroomEl);
 };
-
-
-const getChatrooms = () => __awaiter(void 0, void 0, void 0, function* () {
-    let ref = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(_firebase__WEBPACK_IMPORTED_MODULE_0__.db, "chatrooms");
-    const chatrooms = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(ref);
-    chatrooms.forEach((chatroom) => {
-        console.log(chatroom.id, "=>", chatroom.data());
-        getMessages(chatroom.id);
-    });
-});
-const getMessages = (chatroomId) => __awaiter(void 0, void 0, void 0, function* () {
-    let ref = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(_firebase__WEBPACK_IMPORTED_MODULE_0__.db, "messages"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)("chatroomId", "==", chatroomId));
-    const messages = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(ref);
-    messages.forEach((message) => {
-        console.log(message.id, "=>", message.data());
-    });
-});
 
 
 /***/ }),
@@ -32464,7 +32657,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "backBtns": () => (/* binding */ backBtns),
 /* harmony export */   "chatPage": () => (/* binding */ chatPage),
-/* harmony export */   "chatrooms": () => (/* binding */ chatrooms),
 /* harmony export */   "chatroomsList": () => (/* binding */ chatroomsList),
 /* harmony export */   "chatroomsPage": () => (/* binding */ chatroomsPage),
 /* harmony export */   "completeCreateChatBtn": () => (/* binding */ completeCreateChatBtn),
@@ -32479,6 +32671,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "loginPage": () => (/* binding */ loginPage),
 /* harmony export */   "loginPassword": () => (/* binding */ loginPassword),
 /* harmony export */   "loginPasswordErr": () => (/* binding */ loginPasswordErr),
+/* harmony export */   "logoutBtn": () => (/* binding */ logoutBtn),
+/* harmony export */   "messagesList": () => (/* binding */ messagesList),
 /* harmony export */   "pages": () => (/* binding */ pages),
 /* harmony export */   "registerBtn": () => (/* binding */ registerBtn),
 /* harmony export */   "registerEmail": () => (/* binding */ registerEmail),
@@ -32494,33 +32688,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const registerBtn = document.getElementById("register-btn");
 const loginBtn = document.getElementById("login-btn");
+const logoutBtn = document.getElementById("logout-btn");
 const createChatBtn = document.getElementById("create-chat-btn");
 const completeCreateChatBtn = document.getElementById("complete-create-chat-btn");
 const backBtns = [...document.querySelectorAll(".back-btn")];
-const registerForm = document.getElementById("register-form");
-const loginForm = document.getElementById("login-form");
-const registerName = document.getElementById("register-name");
-const registerEmail = document.getElementById("register-email");
-const registerPassword = document.getElementById("register-password");
-const loginEmail = document.getElementById("login-email");
-const loginPassword = document.getElementById("login-password");
-const registerFormErr = document.getElementById("register-form-err");
-const registerNameErr = document.getElementById("register-name-err");
-const registerEmailErr = document.getElementById("register-email-err");
-const registerPasswordErr = document.getElementById("register-password-err");
-const loginFormErr = document.getElementById("login-form-err");
-const loginEmailErr = document.getElementById("login-email-err");
-const loginPasswordErr = document.getElementById("login-password-err");
-const loginLink = document.getElementById("login-link");
-const registerLink = document.getElementById("register-link");
 const registerPage = document.getElementById("register-page");
 const loginPage = document.getElementById("login-page");
 const chatroomsPage = document.getElementById("chatrooms-page");
 const chatPage = document.getElementById("chat-page");
 const createChatPage = document.getElementById("create-chat-page");
 const pages = [registerPage, loginPage, chatroomsPage, chatPage, createChatPage];
+const registerForm = document.getElementById("register-form");
+const registerName = document.getElementById("register-name");
+const registerEmail = document.getElementById("register-email");
+const registerPassword = document.getElementById("register-password");
+const registerFormErr = document.getElementById("register-form-err");
+const registerNameErr = document.getElementById("register-name-err");
+const registerEmailErr = document.getElementById("register-email-err");
+const registerPasswordErr = document.getElementById("register-password-err");
+const loginLink = document.getElementById("login-link");
+const loginForm = document.getElementById("login-form");
+const loginEmail = document.getElementById("login-email");
+const loginPassword = document.getElementById("login-password");
+const loginFormErr = document.getElementById("login-form-err");
+const loginEmailErr = document.getElementById("login-email-err");
+const loginPasswordErr = document.getElementById("login-password-err");
+const registerLink = document.getElementById("register-link");
 const chatroomsList = document.getElementById("chatrooms-list");
-const chatrooms = [...document.querySelectorAll(".chatrooms__chat")];
+const messagesList = document.getElementById("messages-list");
 
 
 /***/ }),
@@ -32532,174 +32727,34 @@ const chatrooms = [...document.querySelectorAll(".chatrooms__chat")];
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "initEvents": () => (/* binding */ initEvents)
-/* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./src/typescript/lib/constants.ts");
-/* harmony import */ var _firebase__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./firebase */ "./src/typescript/lib/firebase.ts");
+/* harmony import */ var _firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../firebase/auth */ "./src/typescript/firebase/auth.ts");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./src/typescript/lib/router.ts");
 
 
 
-const initEvents = () => {
-    _constants__WEBPACK_IMPORTED_MODULE_0__.registerForm === null || _constants__WEBPACK_IMPORTED_MODULE_0__.registerForm === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.registerForm.addEventListener("submit", (e) => {
-        (0,_firebase__WEBPACK_IMPORTED_MODULE_1__.register)(e);
-    });
-    _constants__WEBPACK_IMPORTED_MODULE_0__.loginForm === null || _constants__WEBPACK_IMPORTED_MODULE_0__.loginForm === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.loginForm.addEventListener("submit", (e) => {
-        (0,_firebase__WEBPACK_IMPORTED_MODULE_1__.login)(e);
-    });
-    _constants__WEBPACK_IMPORTED_MODULE_0__.loginLink === null || _constants__WEBPACK_IMPORTED_MODULE_0__.loginLink === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.loginLink.addEventListener("click", () => {
-        (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.loginPage);
-    });
-    _constants__WEBPACK_IMPORTED_MODULE_0__.registerLink === null || _constants__WEBPACK_IMPORTED_MODULE_0__.registerLink === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.registerLink.addEventListener("click", () => {
-        (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.registerPage);
-    });
-    _constants__WEBPACK_IMPORTED_MODULE_0__.createChatBtn === null || _constants__WEBPACK_IMPORTED_MODULE_0__.createChatBtn === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.createChatBtn.addEventListener("click", () => {
-        (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.createChatPage);
-    });
-    _constants__WEBPACK_IMPORTED_MODULE_0__.chatrooms.forEach((chatroom) => {
-        chatroom === null || chatroom === void 0 ? void 0 : chatroom.addEventListener("click", () => {
-            (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.chatPage);
-        });
-    });
-    _constants__WEBPACK_IMPORTED_MODULE_0__.backBtns.forEach((backBtn) => {
-        backBtn === null || backBtn === void 0 ? void 0 : backBtn.addEventListener("click", () => {
-            (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsPage);
-        });
-    });
-};
-
-
-/***/ }),
-
-/***/ "./src/typescript/lib/firebase.ts":
-/*!****************************************!*\
-  !*** ./src/typescript/lib/firebase.ts ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "analytics": () => (/* binding */ analytics),
-/* harmony export */   "auth": () => (/* binding */ auth),
-/* harmony export */   "db": () => (/* binding */ db),
-/* harmony export */   "firebaseApp": () => (/* binding */ firebaseApp),
-/* harmony export */   "login": () => (/* binding */ login),
-/* harmony export */   "register": () => (/* binding */ register)
-/* harmony export */ });
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.esm.js");
-/* harmony import */ var firebase_analytics__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/analytics */ "./node_modules/firebase/analytics/dist/index.esm.js");
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ "./node_modules/firebase/firestore/dist/index.esm.js");
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants */ "./src/typescript/lib/constants.ts");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./router */ "./src/typescript/lib/router.ts");
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-
-
-
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAfLyWlU3BMjia7qU9-qYDGGMuuPEBtFqU",
-    authDomain: "blitz-chat-d6dc9.firebaseapp.com",
-    projectId: "blitz-chat-d6dc9",
-    storageBucket: "blitz-chat-d6dc9.appspot.com",
-    messagingSenderId: "909983333760",
-    appId: "1:909983333760:web:be045f1d22c5d9378ed565",
-    measurementId: "G-8VW8H07175",
-};
-const firebaseApp = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);
-const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_3__.getAuth)();
-const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(firebaseApp);
-const analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_1__.getAnalytics)(firebaseApp);
-const register = (e) => __awaiter(void 0, void 0, void 0, function* () {
-    e.preventDefault();
-    let errorList = [];
-    let name = "";
-    let email = "";
-    let password = "";
-    if (_constants__WEBPACK_IMPORTED_MODULE_4__.registerName === null || _constants__WEBPACK_IMPORTED_MODULE_4__.registerName === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_4__.registerName.value) {
-        name = _constants__WEBPACK_IMPORTED_MODULE_4__.registerName.value;
-    }
-    else {
-        errorList.push("name error");
-        if (_constants__WEBPACK_IMPORTED_MODULE_4__.registerNameErr !== null)
-            _constants__WEBPACK_IMPORTED_MODULE_4__.registerNameErr.innerHTML = "please fill in your name";
-    }
-    if (_constants__WEBPACK_IMPORTED_MODULE_4__.registerEmail === null || _constants__WEBPACK_IMPORTED_MODULE_4__.registerEmail === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_4__.registerEmail.value) {
-        email = _constants__WEBPACK_IMPORTED_MODULE_4__.registerEmail.value;
-    }
-    else {
-        errorList.push("email error");
-        if (_constants__WEBPACK_IMPORTED_MODULE_4__.registerEmailErr !== null)
-            _constants__WEBPACK_IMPORTED_MODULE_4__.registerEmailErr.innerHTML = "please fill in your e-mail";
-    }
-    if (_constants__WEBPACK_IMPORTED_MODULE_4__.registerPassword === null || _constants__WEBPACK_IMPORTED_MODULE_4__.registerPassword === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_4__.registerPassword.value) {
-        password = _constants__WEBPACK_IMPORTED_MODULE_4__.registerPassword.value;
-    }
-    else {
-        errorList.push("password error");
-        if (_constants__WEBPACK_IMPORTED_MODULE_4__.registerPasswordErr !== null)
-            _constants__WEBPACK_IMPORTED_MODULE_4__.registerPasswordErr.innerHTML = "please fill in a password";
-    }
-    if (errorList.length == 0) {
-        try {
-            let userCredential = yield (0,firebase_auth__WEBPACK_IMPORTED_MODULE_3__.createUserWithEmailAndPassword)(auth, email, password);
-            console.log(userCredential);
-            if (userCredential) {
-                (0,_router__WEBPACK_IMPORTED_MODULE_5__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_4__.loginPage);
-            }
-        }
-        catch (error) {
-            if (_constants__WEBPACK_IMPORTED_MODULE_4__.registerFormErr !== null)
-                _constants__WEBPACK_IMPORTED_MODULE_4__.registerFormErr.innerHTML = "An account with this email already exists";
-            console.error(`code: ${error.code} error: ${error.message}`);
-        }
-    }
+_constants__WEBPACK_IMPORTED_MODULE_0__.registerForm === null || _constants__WEBPACK_IMPORTED_MODULE_0__.registerForm === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.registerForm.addEventListener("submit", (e) => {
+    (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_1__.register)(e);
 });
-const login = (e) => __awaiter(void 0, void 0, void 0, function* () {
-    e.preventDefault();
-    let errorList = [];
-    let email = "";
-    let password = "";
-    if (_constants__WEBPACK_IMPORTED_MODULE_4__.loginEmail === null || _constants__WEBPACK_IMPORTED_MODULE_4__.loginEmail === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_4__.loginEmail.value) {
-        email = _constants__WEBPACK_IMPORTED_MODULE_4__.loginEmail.value;
-    }
-    else {
-        errorList.push("email error");
-        if (_constants__WEBPACK_IMPORTED_MODULE_4__.loginEmailErr !== null)
-            _constants__WEBPACK_IMPORTED_MODULE_4__.loginEmailErr.innerHTML = "please fill in your e-mail";
-    }
-    if (_constants__WEBPACK_IMPORTED_MODULE_4__.loginPassword === null || _constants__WEBPACK_IMPORTED_MODULE_4__.loginPassword === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_4__.loginPassword.value) {
-        password = _constants__WEBPACK_IMPORTED_MODULE_4__.loginPassword.value;
-    }
-    else {
-        errorList.push("password error");
-        if (_constants__WEBPACK_IMPORTED_MODULE_4__.loginPasswordErr !== null)
-            _constants__WEBPACK_IMPORTED_MODULE_4__.loginPasswordErr.innerHTML = "please fill in a password";
-    }
-    if (errorList.length == 0) {
-        try {
-            let userCredential = yield (0,firebase_auth__WEBPACK_IMPORTED_MODULE_3__.signInWithEmailAndPassword)(auth, email, password);
-            if (userCredential) {
-                (0,_router__WEBPACK_IMPORTED_MODULE_5__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_4__.chatroomsPage);
-            }
-        }
-        catch (error) {
-            if (_constants__WEBPACK_IMPORTED_MODULE_4__.loginFormErr !== null)
-                _constants__WEBPACK_IMPORTED_MODULE_4__.loginFormErr.innerHTML = "A login error occured";
-            console.error(`code: ${error.code} error: ${error.message}`);
-        }
-    }
+_constants__WEBPACK_IMPORTED_MODULE_0__.loginForm === null || _constants__WEBPACK_IMPORTED_MODULE_0__.loginForm === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.loginForm.addEventListener("submit", (e) => {
+    (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_1__.login)(e);
+});
+_constants__WEBPACK_IMPORTED_MODULE_0__.logoutBtn === null || _constants__WEBPACK_IMPORTED_MODULE_0__.logoutBtn === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.logoutBtn.addEventListener("click", () => {
+    (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_1__.logout)();
+});
+_constants__WEBPACK_IMPORTED_MODULE_0__.loginLink === null || _constants__WEBPACK_IMPORTED_MODULE_0__.loginLink === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.loginLink.addEventListener("click", () => {
+    (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.loginPage);
+});
+_constants__WEBPACK_IMPORTED_MODULE_0__.registerLink === null || _constants__WEBPACK_IMPORTED_MODULE_0__.registerLink === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.registerLink.addEventListener("click", () => {
+    (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.registerPage);
+});
+_constants__WEBPACK_IMPORTED_MODULE_0__.createChatBtn === null || _constants__WEBPACK_IMPORTED_MODULE_0__.createChatBtn === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.createChatBtn.addEventListener("click", () => {
+    (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.createChatPage);
+});
+_constants__WEBPACK_IMPORTED_MODULE_0__.backBtns.forEach((backBtn) => {
+    backBtn === null || backBtn === void 0 ? void 0 : backBtn.addEventListener("click", () => {
+        (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsPage);
+    });
 });
 
 
@@ -37432,7 +37487,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app */ "./src/typescript/app.ts");
 
 
-window.addEventListener("load", _app__WEBPACK_IMPORTED_MODULE_1__.app);
+window.addEventListener("load", _app__WEBPACK_IMPORTED_MODULE_1__.initApp);
 
 })();
 

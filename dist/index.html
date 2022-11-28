@@ -17,7 +17,7 @@
     <body>
         <main>
             <!-- register pgae begin -->
-            <section id="register-page" class="register page">
+            <section id="register-page" class="register page page--hidden">
                 <div class="login__logo">
                     <img src="./images/logo-dark-bg.svg" alt="logo" />
                 </div>
@@ -70,6 +70,7 @@
                     <img src="./images/logo-dark-bg.svg" alt="logo" />
                 </div>
                 <form id="login-form" class="signup-form" action="#">
+                    <span id="login-form-err" class="error"></span>
                     <div class="signup-form__input-group">
                         <span id="login-email-err" class="error"></span>
                         <div>
@@ -90,11 +91,12 @@
             <!-- login pgae end -->
 
             <!-- chatrooms page begin -->
-            <section id="chatrooms-page" class="chatrooms page page--hidden page--no-padding">
+            <section id="chatrooms-page" class="chatrooms page page--no-padding">
                 <nav class="navigation">
                     <div class="navigation__icon">
                         <img src="./images/logo-icon.svg" alt="" />
                     </div>
+                    <p id="logout-btn">Log out</p>
                     <button class="icon-btn">
                         <img src="./images/icons/profile.svg" alt="profile" />
                     </button>
@@ -103,77 +105,11 @@
                     <p class="subtle bold text-sm">Welcom Bram!</p>
                     <h1>Chatrooms</h1>
                 </div>
-                <ul id="chatrooms-list" class="chatrooms__chat-list container">
-                    <li class="chatrooms__chat">
-                        <div class="chatrooms__chat-icon">
-                            <div class="chatrooms__icon-placeholder"></div>
-                        </div>
-                        <div class="chatrooms__chat-info">
-                            <h4 class="primary-font text-inverted">The boyss</h4>
-                            <p class="extra-subtle bold text-xs">Are u still comming to the party?</p>
-                        </div>
-                        <div class="chatrooms__chat-status">
-                            <p class="extra-subtle bold text-xs">23u47</p>
-                            <img src="./images/icons/check.svg" alt="status icon" />
-                        </div>
-                    </li>
-                    <li class="chatrooms__chat">
-                        <div class="chatrooms__chat-icon">
-                            <div class="chatrooms__icon-placeholder"></div>
-                        </div>
-                        <div class="chatrooms__chat-info">
-                            <h4 class="primary-font text-inverted">The boyss</h4>
-                            <p class="extra-subtle bold text-xs">Are u still comming to the party?</p>
-                        </div>
-                        <div class="chatrooms__chat-status">
-                            <p class="extra-subtle bold text-xs">23u47</p>
-                            <img src="./images/icons/check.svg" alt="status icon" />
-                        </div>
-                    </li>
-                    <li class="chatrooms__chat">
-                        <div class="chatrooms__chat-icon">
-                            <div class="chatrooms__icon-placeholder"></div>
-                        </div>
-                        <div class="chatrooms__chat-info">
-                            <h4 class="primary-font text-inverted">The boyss</h4>
-                            <p class="extra-subtle bold text-xs">Are u still comming to the party?</p>
-                        </div>
-                        <div class="chatrooms__chat-status">
-                            <p class="extra-subtle bold text-xs">23u47</p>
-                            <img src="./images/icons/check.svg" alt="status icon" />
-                        </div>
-                    </li>
-                    <li class="chatrooms__chat">
-                        <div class="chatrooms__chat-icon">
-                            <div class="chatrooms__icon-placeholder"></div>
-                        </div>
-                        <div class="chatrooms__chat-info">
-                            <h4 class="primary-font text-inverted">The boyss</h4>
-                            <p class="extra-subtle bold text-xs">Are u still comming to the party?</p>
-                        </div>
-                        <div class="chatrooms__chat-status">
-                            <p class="extra-subtle bold text-xs">23u47</p>
-                            <img src="./images/icons/check.svg" alt="status icon" />
-                        </div>
-                    </li>
-                    <li class="chatrooms__chat">
-                        <div class="chatrooms__chat-icon">
-                            <div class="chatrooms__icon-placeholder"></div>
-                        </div>
-                        <div class="chatrooms__chat-info">
-                            <h4 class="primary-font text-inverted">The boyss</h4>
-                            <p class="extra-subtle bold text-xs">Are u still comming to the party?</p>
-                        </div>
-                        <div class="chatrooms__chat-status">
-                            <p class="extra-subtle bold text-xs">23u47</p>
-                            <img src="./images/icons/check.svg" alt="status icon" />
-                        </div>
-                    </li>
-                </ul>
+                <ul id="chatrooms-list" class="chatrooms__chat-list container"></ul>
                 <div class="chatrooms__create-chat container">
                     <button id="create-chat-btn" class="create-btn">
                         <img class="create-btn__icon" src="./images/icons/add.svg" alt="create chat" />
-                        <h4 class="primary-font">Create chat</h4>
+                        <h4 class="primary-font">Create chatroom</h4>
                     </button>
                 </div>
             </section>
@@ -200,7 +136,7 @@
                 </nav>
                 <div class="chat__messages-list container">
                     <p class="chip">Today</p>
-                    <ul class="chat__messages">
+                    <ul id="messages-list" class="chat__messages">
                         <li class="chat__message">
                             <p class="chat__message-content">Wnr komde gy nu af?</p>
                             <p class="chat__message-timestamp extra-subtle">16u 13</p>

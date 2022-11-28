@@ -1,9 +1,7 @@
 // ------------------------------------------- //
 // module imports
-import { FirebaseApp, initializeApp } from "firebase/app";
-import { Analytics, getAnalytics } from "firebase/analytics";
-import { Firestore, getFirestore } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, UserCredential } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, UserCredential, signOut } from "firebase/auth";
+import { navigate } from "../lib/router";
 import {
     registerName,
     registerEmail,
@@ -19,24 +17,11 @@ import {
     loginPasswordErr,
     chatroomsPage,
     loginFormErr,
-} from "./constants";
-import { navigate } from "./router";
+} from "../lib/constants";
 // ------------------------------------------- //
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAfLyWlU3BMjia7qU9-qYDGGMuuPEBtFqU",
-    authDomain: "blitz-chat-d6dc9.firebaseapp.com",
-    projectId: "blitz-chat-d6dc9",
-    storageBucket: "blitz-chat-d6dc9.appspot.com",
-    messagingSenderId: "909983333760",
-    appId: "1:909983333760:web:be045f1d22c5d9378ed565",
-    measurementId: "G-8VW8H07175",
-};
-
-export const firebaseApp: FirebaseApp = initializeApp(firebaseConfig);
+// init authentication
 export const auth: Auth = getAuth();
-export const db: Firestore = getFirestore(firebaseApp);
-export const analytics: Analytics = getAnalytics(firebaseApp);
 
 export const register = async (e: Event): Promise<void> => {
     e.preventDefault();
@@ -111,8 +96,18 @@ export const login = async (e: Event): Promise<void> => {
                 navigate(chatroomsPage);
             }
         } catch (error) {
-            if (loginFormErr !== null) loginFormErr.innerHTML = "A login error occured";
+            if (loginFormErr !== null) loginFormErr.innerHTML = "Wrong email password combination";
             console.error(`code: ${error.code} error: ${error.message}`);
         }
     }
+};
+
+auth.onAuthStateChanged((user) => {
+    console.log(user);
+});
+
+export const logout = (): void => {
+    console.log("signing out...");
+    auth.signOut();
+    navigate(loginPage);
 };

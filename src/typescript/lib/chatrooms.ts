@@ -1,26 +1,29 @@
 // ------------------------------------------- //
 // module imports
-import { db } from "./firebase";
-import { collection, CollectionReference, DocumentData, getDocs, query, where, QueryDocumentSnapshot, Query } from "firebase/firestore";
+import { chatPage, chatroomsList } from "./constants";
+import { navigate } from "./router";
 // ------------------------------------------- //
 
-export const getChatrooms = async (): Promise<void> => {
-    let ref: CollectionReference<DocumentData> = collection(db, "chatrooms");
+export const renderChatroom = (data: any): void => {
+    let chatroomEl: Element = document.createElement("li");
+    chatroomEl.classList.add("chatrooms__chat");
+    chatroomEl.innerHTML = `
+        <div class="chatrooms__chat-icon">
+            <div class="chatrooms__icon-placeholder"></div>
+        </div>
+        <div class="chatrooms__chat-info">
+            <h4 class="primary-font text-inverted">${data.name}</h4>
+            <p class="extra-subtle bold text-xs">${data.lastMessage}</p>
+        </div>
+        <div class="chatrooms__chat-status">
+            <p class="extra-subtle bold text-xs">${data.timeOfLastMessage}</p>
+            <img src="./images/icons/check.svg" alt="status icon" />
+        </div>
+    `;
 
-    const chatrooms = await getDocs(ref);
-
-    chatrooms.forEach((chatroom: QueryDocumentSnapshot<DocumentData>) => {
-        console.log(chatroom.id, "=>", chatroom.data());
-        getMessages(chatroom.id);
+    chatroomEl?.addEventListener("click", (): void => {
+        navigate(chatPage);
     });
-};
 
-export const getMessages = async (chatroomId: string): Promise<void> => {
-    let ref: Query<DocumentData> = query(collection(db, "messages"), where("chatroomId", "==", chatroomId));
-
-    const messages = await getDocs(ref);
-
-    messages.forEach((message: QueryDocumentSnapshot<DocumentData>) => {
-        console.log(message.id, "=>", message.data());
-    });
+    chatroomsList?.appendChild(chatroomEl);
 };

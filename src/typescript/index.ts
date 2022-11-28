@@ -3,8 +3,8 @@
 import "../sass/style.scss";
 
 // module imports
-import { app } from "./app";
+import { initApp } from "./app";
 // ------------------------------------------- //
 
 // init app
-window.addEventListener("load", app);
+window.addEventListener("load", initApp);

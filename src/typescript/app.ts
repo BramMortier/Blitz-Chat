@@ -1,10 +1,9 @@
 // ------------------------------------------- //
 // module imports
-import { initEvents } from "./lib/events";
-import { getChatrooms } from "./lib/chatrooms";
+import { getChatrooms } from "./firebase/database";
+import "./lib/events";
 // ------------------------------------------- //
 
-export const app = () => {
+export const initApp = (): void => {
     getChatrooms();
-    initEvents();
 };
