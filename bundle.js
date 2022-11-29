@@ -32640,6 +32640,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createChatroomBtn": () => (/* binding */ createChatroomBtn),
 /* harmony export */   "createChatroomForm": () => (/* binding */ createChatroomForm),
 /* harmony export */   "createChatroomPage": () => (/* binding */ createChatroomPage),
+/* harmony export */   "emailRegex": () => (/* binding */ emailRegex),
 /* harmony export */   "loginBtn": () => (/* binding */ loginBtn),
 /* harmony export */   "loginEmailErr": () => (/* binding */ loginEmailErr),
 /* harmony export */   "loginForm": () => (/* binding */ loginForm),
@@ -32685,6 +32686,7 @@ const registerLink = document.getElementById("register-link");
 const createChatroomForm = document.getElementById("create-chat-form");
 const chatroomsList = document.getElementById("chatrooms-list");
 const messagesList = document.getElementById("messages-list");
+const emailRegex = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
 
 
 /***/ }),
@@ -32726,7 +32728,7 @@ _constants__WEBPACK_IMPORTED_MODULE_0__.createChatroomForm.addEventListener("sub
     (0,_chatrooms__WEBPACK_IMPORTED_MODULE_3__.createChatroom)(e);
 });
 _constants__WEBPACK_IMPORTED_MODULE_0__.backBtns.forEach((backBtn) => {
-    backBtn === null || backBtn === void 0 ? void 0 : backBtn.addEventListener("click", () => {
+    backBtn.addEventListener("click", () => {
         (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsPage);
     });
 });
@@ -32770,15 +32772,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "validateUsername": () => (/* binding */ validateUsername)
 /* harmony export */ });
 const validateUsername = (username) => {
-    if (!username) {
+    if (!username)
         return false;
-    }
+    if (username.length < 4)
+        return false;
     return true;
 };
 const validateEmail = (email) => {
-    if (!email) {
+    if (!email)
         return false;
-    }
     return true;
 };
 const validatePassword = (password) => {
