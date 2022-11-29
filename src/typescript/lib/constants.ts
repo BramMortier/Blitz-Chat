@@ -34,8 +34,16 @@ export const loginPasswordErr = document.getElementById("login-password-err") as
 
 export const registerLink = document.getElementById("register-link") as HTMLElement;
 
-// create chat elements
+// create chat form elements
 export const createChatroomForm = document.getElementById("create-chat-form") as HTMLFormElement;
+
+export const createChatroomNameErr = document.getElementById("create-chatroom-name-err") as HTMLElement;
+export const createChatroomDescriptionErr = document.getElementById("create-chatroom-description-err") as HTMLElement;
+export const createChatroomThemeErr = document.getElementById("create-chatroom-theme-err") as HTMLElement;
+
+// message form
+export const messageForm = document.getElementById("message-form") as HTMLFormElement;
+
 // chatrooms pgae elements
 export const chatroomsList = document.getElementById("chatrooms-list") as HTMLElement;
 
@@ -44,3 +52,6 @@ export const messagesList = document.getElementById("messages-list") as HTMLElem
 
 // regular expressions
 export const emailRegex: RegExp = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+
+// other
+export const body = document.getElementsByTagName("body");

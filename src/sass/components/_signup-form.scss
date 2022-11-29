@@ -22,6 +22,11 @@
         border: none;
         background-color: transparent;
         outline: none;
+        color: var(--col-mid-gray);
+
+        &::placeholder {
+            color: var(--col-mid-gray);
+        }
     }
 
     &__input-icon {

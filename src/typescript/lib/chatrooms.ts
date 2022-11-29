@@ -1,19 +1,20 @@
 // ------------------------------------------- //
 // module imports
-import { newChatroom } from "../firebase/database";
-import { chatPage, chatroomsList, chatroomsPage, createChatroomForm } from "./constants";
+import { getMessages, newChatroom } from "../firebase/database";
+import { chatPage, chatroomsList, chatroomsPage, createChatroomForm, createChatroomNameErr, createChatroomThemeErr } from "./constants";
 import { navigate } from "./router";
+import { validateText } from "./validation";
 // ------------------------------------------- //
 
 export const renderChatroom = (id: string, data: any): void => {
     let chatroomEl: Element = document.createElement("li");
     chatroomEl.classList.add("chatrooms__chat");
     chatroomEl.innerHTML = `
+        <span class="chatrooms__chatroom-id">${id}</span>
         <div class="chatrooms__chat-icon">
             <div class="chatrooms__icon-placeholder"></div>
         </div>
         <div class="chatrooms__chat-info">
-            <span class="chatrooms__chatroom-id">${id}</span>
             <h4 class="primary-font text-inverted">${data.name}</h4>
             <p class="extra-subtle bold text-xs">${data.lastMessage}</p>
         </div>
@@ -25,10 +26,7 @@ export const renderChatroom = (id: string, data: any): void => {
 
     chatroomEl?.addEventListener("click", (e: Event): void => {
         let targetChatroom = e.target as HTMLElement;
-
-        targetChatroom = targetChatroom.classList.contains("chatrooms__chat") ? targetChatroom : (targetChatroom.parentElement as HTMLElement);
-
-        console.log(targetChatroom);
+        getMessages(targetChatroom.innerText);
 
         navigate(chatPage);
     });
@@ -51,6 +49,9 @@ export const createChatroom = async (e: Event): Promise<void> => {
     let description: string = createChatroomForm.description.value;
     let theme: string = createChatroomForm.theme.value;
 
+    if (!validateText(name)) createChatroomNameErr.innerHTML = "please fill in a name";
+    if (!validateText(theme)) createChatroomThemeErr.innerHTML = "please choose a theme";
+
     let data: newChatroomData = {
         name: name,
         description: description,
@@ -59,7 +60,8 @@ export const createChatroom = async (e: Event): Promise<void> => {
         timeOfLastMessage: "",
     };
 
-    newChatroom(data);
-
-    // navigate(chatroomsPage);
+    if (validateText(name) && validateText(theme)) {
+        newChatroom(data);
+        navigate(chatroomsPage);
+    }
 };

@@ -13,10 +13,12 @@ import {
     registerPage,
     logoutBtn,
     createChatroomForm,
+    messageForm,
 } from "./constants";
 import { login, logout, register } from "../firebase/auth";
 import { navigate } from "./router";
 import { createChatroom } from "./chatrooms";
+import { sendMessage } from "./messages";
 // ------------------------------------------- //
 
 // auth events
@@ -47,6 +49,11 @@ createChatroomBtn.addEventListener("click", (): void => {
 
 createChatroomForm.addEventListener("submit", (e: Event): void => {
     createChatroom(e);
+});
+
+// message event
+messageForm.addEventListener("submit", (e: Event): void => {
+    sendMessage(e);
 });
 
 // all back btns

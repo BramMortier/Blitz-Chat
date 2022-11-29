@@ -23,8 +23,10 @@ export const auth: Auth = getAuth();
 
 auth.onAuthStateChanged((user: User): void => {
     if (user) {
+        sessionStorage.setItem("userId", user.uid);
         navigate(chatroomsPage);
     } else {
+        sessionStorage.removeItem("userId");
         navigate(loginPage);
     }
 });

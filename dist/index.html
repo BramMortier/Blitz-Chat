@@ -154,7 +154,7 @@
                             <p class="chat__message-timestamp extra-subtle">16u 13</p>
                         </li>
                     </ul>
-                    <form class="chat__message-input">
+                    <form id="message-form" class="chat__message-input">
                         <input class="primary-font" type="text" name="message" placeholder="Message..." />
                         <button class="icon-btn icon-btn--blue icon-btn--medium" type="submit">
                             <img src="./images/icons/send.svg" alt="send message button" />
@@ -178,11 +178,13 @@
                     <fieldset class="create-chat__general-settings">
                         <legend>General info</legend>
                         <div class="signup-form__input-group">
+                            <span id="create-chatroom-name-err" class="error"></span>
                             <div>
                                 <input class="signup-form__input" type="text" name="groupname" placeholder="Groupname" />
                             </div>
                         </div>
                         <div class="signup-form__input-group">
+                            <span id="create-chatroom-description-err" class="error"></span>
                             <div>
                                 <input class="signup-form__input" type="text" name="description" placeholder="Description" />
                             </div>
@@ -190,10 +192,13 @@
                     </fieldset>
                     <fieldset class="create-chat__theme">
                         <legend>Color theme</legend>
-                        <input type="radio" name="theme" value="yellow" />
-                        <input type="radio" name="theme" value="red" />
-                        <input type="radio" name="theme" value="green" />
-                        <input type="radio" name="theme" value="purple" />
+                        <span id="create-chatroom-theme-err" class="error"></span>
+                        <div class="create-chat__theme-options">
+                            <input type="radio" name="theme" value="yellow" />
+                            <input type="radio" name="theme" value="red" />
+                            <input type="radio" name="theme" value="green" />
+                            <input type="radio" name="theme" value="purple" />
+                        </div>
                     </fieldset>
                     <fieldset class="create-chat__icon">
                         <legend>Group icon</legend>

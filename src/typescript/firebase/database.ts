@@ -2,7 +2,8 @@
 // module imports
 import { firebaseApp } from "./firebase";
 import { newChatroomData, renderChatroom } from "../lib/chatrooms";
-import { chatroomsList } from "../lib/constants";
+import { newMessageData, renderMessage } from "../lib/messages";
+import { chatroomsList, messagesList } from "../lib/constants";
 import {
     Firestore,
     getFirestore,
@@ -40,11 +41,19 @@ export const newChatroom = async (data: newChatroomData): Promise<void> => {
 };
 
 export const getMessages = async (chatroomId: string): Promise<void> => {
-    let ref: Query<DocumentData> = query(messagesRef, where("chatroomId", "==", chatroomId));
+    messagesList.innerHTML = "";
 
-    const messages = await getDocs(ref);
+    let queryStatement: Query<DocumentData> = query(messagesRef, where("chatroomId", "==", chatroomId));
+
+    const messages = await getDocs(queryStatement);
 
     messages.forEach((message: QueryDocumentSnapshot<DocumentData>) => {
         console.log(message.id, "=>", message.data());
+
+        renderMessage(message.data());
     });
+};
+
+export const newMessage = async (data: newMessageData): Promise<void> => {
+    await addDoc(messagesRef, data);
 };
