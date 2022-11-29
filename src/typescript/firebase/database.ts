@@ -24,7 +24,7 @@ export const getChatrooms = async (): Promise<void> => {
     const chatrooms = await getDocs(ref);
 
     chatrooms.forEach((chatroom: QueryDocumentSnapshot<DocumentData>) => {
-        console.log(chatroom.id, "=>", chatroom.data());
+        // console.log(chatroom.id, "=>", chatroom.data());
         renderChatroom(chatroom.data());
     });
 };

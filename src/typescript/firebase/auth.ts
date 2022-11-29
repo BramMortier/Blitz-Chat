@@ -1,68 +1,56 @@
 // ------------------------------------------- //
 // module imports
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, UserCredential, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, UserCredential, User } from "firebase/auth";
+import { validateEmail, validateUsername, validatePassword } from "../lib/validation";
 import { navigate } from "../lib/router";
 import {
-    registerName,
-    registerEmail,
-    registerPassword,
-    registerNameErr,
+    registerUsernameErr,
     registerPasswordErr,
     registerEmailErr,
     loginPage,
     registerFormErr,
-    loginEmail,
     loginEmailErr,
-    loginPassword,
     loginPasswordErr,
     chatroomsPage,
     loginFormErr,
+    loginForm,
+    registerForm,
 } from "../lib/constants";
 // ------------------------------------------- //
 
 // init authentication
 export const auth: Auth = getAuth();
 
+auth.onAuthStateChanged((user: User): void => {
+    if (user) {
+        navigate(chatroomsPage);
+    } else {
+        navigate(loginPage);
+    }
+});
+
 export const register = async (e: Event): Promise<void> => {
     e.preventDefault();
 
-    let errorList: string[] = [];
+    let username: string = registerForm.username.value;
+    let email: string = registerForm.email.value;
+    let password: string = registerForm.password.value;
 
-    let name: string = "";
-    let email: string = "";
-    let password: string = "";
+    if (!validateUsername(username)) registerUsernameErr.innerHTML = "please fill in a username";
+    if (!validateEmail(email)) registerEmailErr.innerHTML = "please fill in your email";
+    if (!validatePassword(password)) registerPasswordErr.innerHTML = "password can't be empty";
 
-    if (registerName?.value) {
-        name = registerName.value;
-    } else {
-        errorList.push("name error");
-        if (registerNameErr !== null) registerNameErr.innerHTML = "please fill in your name";
-    }
-
-    if (registerEmail?.value) {
-        email = registerEmail.value;
-    } else {
-        errorList.push("email error");
-        if (registerEmailErr !== null) registerEmailErr.innerHTML = "please fill in your e-mail";
-    }
-
-    if (registerPassword?.value) {
-        password = registerPassword.value;
-    } else {
-        errorList.push("password error");
-        if (registerPasswordErr !== null) registerPasswordErr.innerHTML = "please fill in a password";
-    }
-
-    if (errorList.length == 0) {
+    if (validateUsername(username) && validateEmail(email) && validatePassword(password)) {
         try {
             let userCredential: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
             console.log(userCredential);
+
             if (userCredential) {
+                registerForm.reset();
                 navigate(loginPage);
             }
         } catch (error) {
-            if (registerFormErr !== null) registerFormErr.innerHTML = "An account with this email already exists";
-            console.error(`code: ${error.code} error: ${error.message}`);
+            registerFormErr.innerHTML = "An account with this email already exists";
         }
     }
 };
@@ -70,44 +58,27 @@ export const register = async (e: Event): Promise<void> => {
 export const login = async (e: Event): Promise<void> => {
     e.preventDefault();
 
-    let errorList: string[] = [];
+    let email: string = loginForm.email.value;
+    let password: string = loginForm.password.value;
 
-    let email: string = "";
-    let password: string = "";
+    if (!validateEmail(email)) loginEmailErr.innerHTML = "email can't be empty";
+    if (!validatePassword(password)) loginPasswordErr.innerHTML = "password can't be empty";
 
-    if (loginEmail?.value) {
-        email = loginEmail.value;
-    } else {
-        errorList.push("email error");
-        if (loginEmailErr !== null) loginEmailErr.innerHTML = "please fill in your e-mail";
-    }
-
-    if (loginPassword?.value) {
-        password = loginPassword.value;
-    } else {
-        errorList.push("password error");
-        if (loginPasswordErr !== null) loginPasswordErr.innerHTML = "please fill in a password";
-    }
-
-    if (errorList.length == 0) {
+    if (validateEmail(email) && validatePassword(password)) {
         try {
             let userCredential: UserCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log(userCredential);
+
             if (userCredential) {
+                loginForm?.reset();
                 navigate(chatroomsPage);
             }
         } catch (error) {
-            if (loginFormErr !== null) loginFormErr.innerHTML = "Wrong email password combination";
-            console.error(`code: ${error.code} error: ${error.message}`);
+            loginFormErr.innerHTML = "Wrong email password combination";
         }
     }
 };
 
-auth.onAuthStateChanged((user) => {
-    console.log(user);
-});
-
 export const logout = (): void => {
-    console.log("signing out...");
     auth.signOut();
-    navigate(loginPage);
 };

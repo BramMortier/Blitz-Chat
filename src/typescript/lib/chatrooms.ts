@@ -1,6 +1,6 @@
 // ------------------------------------------- //
 // module imports
-import { chatPage, chatroomsList } from "./constants";
+import { chatPage, chatroomsList, chatroomsPage, createChatroomForm } from "./constants";
 import { navigate } from "./router";
 // ------------------------------------------- //
 
@@ -26,4 +26,12 @@ export const renderChatroom = (data: any): void => {
     });
 
     chatroomsList?.appendChild(chatroomEl);
+};
+
+export const createChatroom = (e: Event): void => {
+    e.preventDefault();
+
+    console.log(createChatroomForm.groupname.value);
+
+    navigate(chatroomsPage);
 };

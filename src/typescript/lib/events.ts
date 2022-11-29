@@ -4,45 +4,54 @@ import {
     registerForm,
     chatroomsPage,
     backBtns,
-    createChatBtn,
-    createChatPage,
+    createChatroomBtn,
+    createChatroomPage,
     loginForm,
     loginLink,
     loginPage,
     registerLink,
     registerPage,
     logoutBtn,
+    createChatroomForm,
 } from "./constants";
 import { login, logout, register } from "../firebase/auth";
 import { navigate } from "./router";
+import { createChatroom } from "./chatrooms";
 // ------------------------------------------- //
 
-registerForm?.addEventListener("submit", (e: Event): void => {
+// auth events
+registerForm.addEventListener("submit", (e: Event): void => {
     register(e);
 });
 
-loginForm?.addEventListener("submit", (e: Event): void => {
+loginForm.addEventListener("submit", (e: Event): void => {
     login(e);
 });
 
-logoutBtn?.addEventListener("click", (): void => {
+logoutBtn.addEventListener("click", (): void => {
     logout();
 });
 
-loginLink?.addEventListener("click", (): void => {
+loginLink.addEventListener("click", (): void => {
     navigate(loginPage);
 });
 
-registerLink?.addEventListener("click", (): void => {
+registerLink.addEventListener("click", (): void => {
     navigate(registerPage);
 });
 
-createChatBtn?.addEventListener("click", (): void => {
-    navigate(createChatPage);
+// chatroom events
+createChatroomBtn.addEventListener("click", (): void => {
+    navigate(createChatroomPage);
 });
 
-backBtns.forEach((backBtn: Element | null) => {
-    backBtn?.addEventListener("click", (): void => {
+createChatroomForm.addEventListener("submit", (e: Event): void => {
+    createChatroom(e);
+});
+
+// all back btns
+backBtns.forEach((backBtn: HTMLElement): void => {
+    backBtn.addEventListener("click", (): void => {
         navigate(chatroomsPage);
     });
 });

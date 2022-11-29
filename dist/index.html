@@ -26,19 +26,19 @@
                     <div class="signup-form__input-group">
                         <span id="register-name-err" class="error"></span>
                         <div>
-                            <input id="register-name" class="signup-form__input" type="text" placeholder="Name" />
+                            <input class="signup-form__input" type="text" name="username" placeholder="Username" />
                         </div>
                     </div>
                     <div class="signup-form__input-group">
                         <span id="register-email-err" class="error"></span>
                         <div>
-                            <input id="register-email" class="signup-form__input" type="text" placeholder="E-mail" />
+                            <input class="signup-form__input" type="text" name="email" placeholder="E-mail" />
                         </div>
                     </div>
                     <div class="signup-form__input-group">
                         <span id="register-password-err" class="error"></span>
                         <div>
-                            <input id="register-password" class="signup-form__input" type="password" placeholder="Password" />
+                            <input class="signup-form__input" type="password" name="password" placeholder="Password" />
                             <img class="signup-form__input-icon" src="./images/icons/eye-closed.svg" alt="eye" />
                         </div>
                     </div>
@@ -74,13 +74,13 @@
                     <div class="signup-form__input-group">
                         <span id="login-email-err" class="error"></span>
                         <div>
-                            <input id="login-email" class="signup-form__input" type="text" placeholder="E-mail" />
+                            <input id="login-email" class="signup-form__input" type="text" name="email" placeholder="E-mail" />
                         </div>
                     </div>
                     <div class="signup-form__input-group">
                         <span id="login-password-err" class="error"></span>
                         <div>
-                            <input id="login-password" class="signup-form__input" type="password" placeholder="Password" />
+                            <input id="login-password" class="signup-form__input" type="password" name="password" placeholder="Password" />
                             <img class="signup-form__input-icon" src="./images/icons/eye-closed.svg" alt="eye" />
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                         <img src="./images/icons/profile.svg" alt="profile" />
                     </button>
                 </nav>
-                <form class="create-chat__settings container">
+                <form id="create-chat-form" class="create-chat__settings container">
                     <fieldset class="create-chat__general-settings">
                         <legend>General info</legend>
                         <div class="signup-form__input-group">
@@ -199,7 +199,7 @@
                         <legend>Group icon</legend>
                         <p class="extra-subtle">Todo</p>
                     </fieldset>
-                    <button id="complete-create-chat-btn" class="btn btn--primary">Create chat</button>
+                    <button type="submit" id="complete-create-chat-btn" class="btn btn--primary">Create chat</button>
                 </form>
             </section>
             <!-- create chat page end -->
