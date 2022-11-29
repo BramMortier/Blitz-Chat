@@ -28,6 +28,10 @@
         }
     }
 
+    &__chatroom-id {
+        display: none;
+    }
+
     &__chat {
         display: flex;
         align-items: center;

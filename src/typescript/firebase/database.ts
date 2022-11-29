@@ -1,7 +1,8 @@
 // ------------------------------------------- //
 // module imports
 import { firebaseApp } from "./firebase";
-import { renderChatroom } from "../lib/chatrooms";
+import { newChatroomData, renderChatroom } from "../lib/chatrooms";
+import { chatroomsList } from "../lib/constants";
 import {
     Firestore,
     getFirestore,
@@ -13,24 +14,33 @@ import {
     where,
     QueryDocumentSnapshot,
     Query,
+    addDoc,
+    onSnapshot,
 } from "firebase/firestore";
 // ------------------------------------------- //
 
+// Database init
 export const db: Firestore = getFirestore(firebaseApp);
 
-export const getChatrooms = async (): Promise<void> => {
-    let ref: CollectionReference<DocumentData> = collection(db, "chatrooms");
+// Collection references
+let chatroomsRef: CollectionReference<DocumentData> = collection(db, "chatrooms");
+let messagesRef: CollectionReference<DocumentData> = collection(db, "messages");
 
-    const chatrooms = await getDocs(ref);
+onSnapshot(chatroomsRef, (chatrooms) => {
+    chatroomsList.innerHTML = "";
 
     chatrooms.forEach((chatroom: QueryDocumentSnapshot<DocumentData>) => {
         // console.log(chatroom.id, "=>", chatroom.data());
-        renderChatroom(chatroom.data());
+        renderChatroom(chatroom.id, chatroom.data());
     });
+});
+
+export const newChatroom = async (data: newChatroomData): Promise<void> => {
+    await addDoc(chatroomsRef, data);
 };
 
 export const getMessages = async (chatroomId: string): Promise<void> => {
-    let ref: Query<DocumentData> = query(collection(db, "messages"), where("chatroomId", "==", chatroomId));
+    let ref: Query<DocumentData> = query(messagesRef, where("chatroomId", "==", chatroomId));
 
     const messages = await getDocs(ref);
 
