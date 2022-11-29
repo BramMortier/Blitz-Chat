@@ -32399,13 +32399,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "initApp": () => (/* binding */ initApp)
 /* harmony export */ });
-/* harmony import */ var _firebase_database__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firebase/database */ "./src/typescript/firebase/database.ts");
+/* harmony import */ var _firebase_firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firebase/firebase */ "./src/typescript/firebase/firebase.ts");
 /* harmony import */ var _lib_events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/events */ "./src/typescript/lib/events.ts");
 
 
-const initApp = () => {
-    (0,_firebase_database__WEBPACK_IMPORTED_MODULE_0__.getChatrooms)();
-};
+const initApp = () => { };
 
 
 /***/ }),
@@ -32512,12 +32510,13 @@ const logout = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "db": () => (/* binding */ db),
-/* harmony export */   "getChatrooms": () => (/* binding */ getChatrooms),
-/* harmony export */   "getMessages": () => (/* binding */ getMessages)
+/* harmony export */   "getMessages": () => (/* binding */ getMessages),
+/* harmony export */   "newChatroom": () => (/* binding */ newChatroom)
 /* harmony export */ });
 /* harmony import */ var _firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firebase */ "./src/typescript/firebase/firebase.ts");
 /* harmony import */ var _lib_chatrooms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/chatrooms */ "./src/typescript/lib/chatrooms.ts");
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ "./node_modules/firebase/firestore/dist/index.esm.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/constants */ "./src/typescript/lib/constants.ts");
+/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/firestore */ "./node_modules/firebase/firestore/dist/index.esm.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -32530,17 +32529,22 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
-const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(_firebase__WEBPACK_IMPORTED_MODULE_0__.firebaseApp);
-const getChatrooms = () => __awaiter(void 0, void 0, void 0, function* () {
-    let ref = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, "chatrooms");
-    const chatrooms = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(ref);
+
+const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getFirestore)(_firebase__WEBPACK_IMPORTED_MODULE_0__.firebaseApp);
+let chatroomsRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.collection)(db, "chatrooms");
+let messagesRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.collection)(db, "messages");
+(0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.onSnapshot)(chatroomsRef, (chatrooms) => {
+    _lib_constants__WEBPACK_IMPORTED_MODULE_2__.chatroomsList.innerHTML = "";
     chatrooms.forEach((chatroom) => {
-        (0,_lib_chatrooms__WEBPACK_IMPORTED_MODULE_1__.renderChatroom)(chatroom.data());
+        (0,_lib_chatrooms__WEBPACK_IMPORTED_MODULE_1__.renderChatroom)(chatroom.id, chatroom.data());
     });
 });
+const newChatroom = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.addDoc)(chatroomsRef, data);
+});
 const getMessages = (chatroomId) => __awaiter(void 0, void 0, void 0, function* () {
-    let ref = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, "messages"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)("chatroomId", "==", chatroomId));
-    const messages = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(ref);
+    let ref = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.query)(messagesRef, (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("chatroomId", "==", chatroomId));
+    const messages = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getDocs)(ref);
     messages.forEach((message) => {
         console.log(message.id, "=>", message.data());
     });
@@ -32590,11 +32594,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createChatroom": () => (/* binding */ createChatroom),
 /* harmony export */   "renderChatroom": () => (/* binding */ renderChatroom)
 /* harmony export */ });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./src/typescript/lib/constants.ts");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./src/typescript/lib/router.ts");
+/* harmony import */ var _firebase_database__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../firebase/database */ "./src/typescript/firebase/database.ts");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./src/typescript/lib/constants.ts");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./src/typescript/lib/router.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 
 
-const renderChatroom = (data) => {
+
+const renderChatroom = (id, data) => {
     let chatroomEl = document.createElement("li");
     chatroomEl.classList.add("chatrooms__chat");
     chatroomEl.innerHTML = `
@@ -32602,6 +32617,7 @@ const renderChatroom = (data) => {
             <div class="chatrooms__icon-placeholder"></div>
         </div>
         <div class="chatrooms__chat-info">
+            <span class="chatrooms__chatroom-id">${id}</span>
             <h4 class="primary-font text-inverted">${data.name}</h4>
             <p class="extra-subtle bold text-xs">${data.lastMessage}</p>
         </div>
@@ -32610,16 +32626,28 @@ const renderChatroom = (data) => {
             <img src="./images/icons/check.svg" alt="status icon" />
         </div>
     `;
-    chatroomEl === null || chatroomEl === void 0 ? void 0 : chatroomEl.addEventListener("click", () => {
-        (0,_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.chatPage);
+    chatroomEl === null || chatroomEl === void 0 ? void 0 : chatroomEl.addEventListener("click", (e) => {
+        let targetChatroom = e.target;
+        targetChatroom = targetChatroom.classList.contains("chatrooms__chat") ? targetChatroom : targetChatroom.parentElement;
+        console.log(targetChatroom);
+        (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_1__.chatPage);
     });
-    _constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsList === null || _constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsList === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsList.appendChild(chatroomEl);
+    _constants__WEBPACK_IMPORTED_MODULE_1__.chatroomsList === null || _constants__WEBPACK_IMPORTED_MODULE_1__.chatroomsList === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_1__.chatroomsList.appendChild(chatroomEl);
 };
-const createChatroom = (e) => {
+const createChatroom = (e) => __awaiter(void 0, void 0, void 0, function* () {
     e.preventDefault();
-    console.log(_constants__WEBPACK_IMPORTED_MODULE_0__.createChatroomForm.groupname.value);
-    (0,_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsPage);
-};
+    let name = _constants__WEBPACK_IMPORTED_MODULE_1__.createChatroomForm.groupname.value;
+    let description = _constants__WEBPACK_IMPORTED_MODULE_1__.createChatroomForm.description.value;
+    let theme = _constants__WEBPACK_IMPORTED_MODULE_1__.createChatroomForm.theme.value;
+    let data = {
+        name: name,
+        description: description,
+        theme: theme,
+        lastMessage: "",
+        timeOfLastMessage: "",
+    };
+    (0,_firebase_database__WEBPACK_IMPORTED_MODULE_0__.newChatroom)(data);
+});
 
 
 /***/ }),

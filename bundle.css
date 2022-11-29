@@ -301,6 +301,9 @@ a {
 .chatrooms__chat-list::-webkit-scrollbar {
   display: none;
 }
+.chatrooms__chatroom-id {
+  display: none;
+}
 .chatrooms__chat {
   display: flex;
   align-items: center;
