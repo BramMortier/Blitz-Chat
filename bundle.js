@@ -32424,8 +32424,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "register": () => (/* binding */ register)
 /* harmony export */ });
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
-/* harmony import */ var _lib_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/router */ "./src/typescript/lib/router.ts");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/constants */ "./src/typescript/lib/constants.ts");
+/* harmony import */ var _lib_validation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/validation */ "./src/typescript/lib/validation.ts");
+/* harmony import */ var _lib_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/router */ "./src/typescript/lib/router.ts");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/constants */ "./src/typescript/lib/constants.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -32438,94 +32439,65 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
 const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)();
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        (0,_lib_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_3__.chatroomsPage);
+    }
+    else {
+        (0,_lib_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginPage);
+    }
+});
 const register = (e) => __awaiter(void 0, void 0, void 0, function* () {
     e.preventDefault();
-    let errorList = [];
-    let name = "";
-    let email = "";
-    let password = "";
-    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerName === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerName === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerName.value) {
-        name = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerName.value;
-    }
-    else {
-        errorList.push("name error");
-        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerNameErr !== null)
-            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerNameErr.innerHTML = "please fill in your name";
-    }
-    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmail === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmail === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmail.value) {
-        email = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmail.value;
-    }
-    else {
-        errorList.push("email error");
-        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmailErr !== null)
-            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerEmailErr.innerHTML = "please fill in your e-mail";
-    }
-    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPassword === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPassword === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPassword.value) {
-        password = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPassword.value;
-    }
-    else {
-        errorList.push("password error");
-        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPasswordErr !== null)
-            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerPasswordErr.innerHTML = "please fill in a password";
-    }
-    if (errorList.length == 0) {
+    let username = _lib_constants__WEBPACK_IMPORTED_MODULE_3__.registerForm.username.value;
+    let email = _lib_constants__WEBPACK_IMPORTED_MODULE_3__.registerForm.email.value;
+    let password = _lib_constants__WEBPACK_IMPORTED_MODULE_3__.registerForm.password.value;
+    if (!(0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validateUsername)(username))
+        _lib_constants__WEBPACK_IMPORTED_MODULE_3__.registerUsernameErr.innerHTML = "please fill in a username";
+    if (!(0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validateEmail)(email))
+        _lib_constants__WEBPACK_IMPORTED_MODULE_3__.registerEmailErr.innerHTML = "please fill in your email";
+    if (!(0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validatePassword)(password))
+        _lib_constants__WEBPACK_IMPORTED_MODULE_3__.registerPasswordErr.innerHTML = "password can't be empty";
+    if ((0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validateUsername)(username) && (0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validateEmail)(email) && (0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validatePassword)(password)) {
         try {
             let userCredential = yield (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.createUserWithEmailAndPassword)(auth, email, password);
             console.log(userCredential);
             if (userCredential) {
-                (0,_lib_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPage);
+                _lib_constants__WEBPACK_IMPORTED_MODULE_3__.registerForm.reset();
+                (0,_lib_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginPage);
             }
         }
         catch (error) {
-            if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerFormErr !== null)
-                _lib_constants__WEBPACK_IMPORTED_MODULE_2__.registerFormErr.innerHTML = "An account with this email already exists";
-            console.error(`code: ${error.code} error: ${error.message}`);
+            _lib_constants__WEBPACK_IMPORTED_MODULE_3__.registerFormErr.innerHTML = "An account with this email already exists";
         }
     }
 });
 const login = (e) => __awaiter(void 0, void 0, void 0, function* () {
     e.preventDefault();
-    let errorList = [];
-    let email = "";
-    let password = "";
-    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmail === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmail === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmail.value) {
-        email = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmail.value;
-    }
-    else {
-        errorList.push("email error");
-        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmailErr !== null)
-            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginEmailErr.innerHTML = "please fill in your e-mail";
-    }
-    if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPassword === null || _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPassword === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPassword.value) {
-        password = _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPassword.value;
-    }
-    else {
-        errorList.push("password error");
-        if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPasswordErr !== null)
-            _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPasswordErr.innerHTML = "please fill in a password";
-    }
-    if (errorList.length == 0) {
+    let email = _lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginForm.email.value;
+    let password = _lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginForm.password.value;
+    if (!(0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validateEmail)(email))
+        _lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginEmailErr.innerHTML = "email can't be empty";
+    if (!(0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validatePassword)(password))
+        _lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginPasswordErr.innerHTML = "password can't be empty";
+    if ((0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validateEmail)(email) && (0,_lib_validation__WEBPACK_IMPORTED_MODULE_1__.validatePassword)(password)) {
         try {
             let userCredential = yield (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithEmailAndPassword)(auth, email, password);
+            console.log(userCredential);
             if (userCredential) {
-                (0,_lib_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_2__.chatroomsPage);
+                _lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginForm === null || _lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginForm === void 0 ? void 0 : _lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginForm.reset();
+                (0,_lib_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_3__.chatroomsPage);
             }
         }
         catch (error) {
-            if (_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginFormErr !== null)
-                _lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginFormErr.innerHTML = "Wrong email password combination";
-            console.error(`code: ${error.code} error: ${error.message}`);
+            _lib_constants__WEBPACK_IMPORTED_MODULE_3__.loginFormErr.innerHTML = "Wrong email password combination";
         }
     }
 });
-auth.onAuthStateChanged((user) => {
-    console.log(user);
-});
 const logout = () => {
-    console.log("signing out...");
     auth.signOut();
-    (0,_lib_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_lib_constants__WEBPACK_IMPORTED_MODULE_2__.loginPage);
 };
 
 
@@ -32563,7 +32535,6 @@ const getChatrooms = () => __awaiter(void 0, void 0, void 0, function* () {
     let ref = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, "chatrooms");
     const chatrooms = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(ref);
     chatrooms.forEach((chatroom) => {
-        console.log(chatroom.id, "=>", chatroom.data());
         (0,_lib_chatrooms__WEBPACK_IMPORTED_MODULE_1__.renderChatroom)(chatroom.data());
     });
 });
@@ -32616,6 +32587,7 @@ const analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_1__.getAnalytic
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createChatroom": () => (/* binding */ createChatroom),
 /* harmony export */   "renderChatroom": () => (/* binding */ renderChatroom)
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./src/typescript/lib/constants.ts");
@@ -32643,6 +32615,11 @@ const renderChatroom = (data) => {
     });
     _constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsList === null || _constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsList === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsList.appendChild(chatroomEl);
 };
+const createChatroom = (e) => {
+    e.preventDefault();
+    console.log(_constants__WEBPACK_IMPORTED_MODULE_0__.createChatroomForm.groupname.value);
+    (0,_router__WEBPACK_IMPORTED_MODULE_1__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.chatroomsPage);
+};
 
 
 /***/ }),
@@ -32659,61 +32636,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "chatPage": () => (/* binding */ chatPage),
 /* harmony export */   "chatroomsList": () => (/* binding */ chatroomsList),
 /* harmony export */   "chatroomsPage": () => (/* binding */ chatroomsPage),
-/* harmony export */   "completeCreateChatBtn": () => (/* binding */ completeCreateChatBtn),
-/* harmony export */   "createChatBtn": () => (/* binding */ createChatBtn),
-/* harmony export */   "createChatPage": () => (/* binding */ createChatPage),
+/* harmony export */   "completeCreateChatroomBtn": () => (/* binding */ completeCreateChatroomBtn),
+/* harmony export */   "createChatroomBtn": () => (/* binding */ createChatroomBtn),
+/* harmony export */   "createChatroomForm": () => (/* binding */ createChatroomForm),
+/* harmony export */   "createChatroomPage": () => (/* binding */ createChatroomPage),
 /* harmony export */   "loginBtn": () => (/* binding */ loginBtn),
-/* harmony export */   "loginEmail": () => (/* binding */ loginEmail),
 /* harmony export */   "loginEmailErr": () => (/* binding */ loginEmailErr),
 /* harmony export */   "loginForm": () => (/* binding */ loginForm),
 /* harmony export */   "loginFormErr": () => (/* binding */ loginFormErr),
 /* harmony export */   "loginLink": () => (/* binding */ loginLink),
 /* harmony export */   "loginPage": () => (/* binding */ loginPage),
-/* harmony export */   "loginPassword": () => (/* binding */ loginPassword),
 /* harmony export */   "loginPasswordErr": () => (/* binding */ loginPasswordErr),
 /* harmony export */   "logoutBtn": () => (/* binding */ logoutBtn),
 /* harmony export */   "messagesList": () => (/* binding */ messagesList),
 /* harmony export */   "pages": () => (/* binding */ pages),
 /* harmony export */   "registerBtn": () => (/* binding */ registerBtn),
-/* harmony export */   "registerEmail": () => (/* binding */ registerEmail),
 /* harmony export */   "registerEmailErr": () => (/* binding */ registerEmailErr),
 /* harmony export */   "registerForm": () => (/* binding */ registerForm),
 /* harmony export */   "registerFormErr": () => (/* binding */ registerFormErr),
 /* harmony export */   "registerLink": () => (/* binding */ registerLink),
-/* harmony export */   "registerName": () => (/* binding */ registerName),
-/* harmony export */   "registerNameErr": () => (/* binding */ registerNameErr),
 /* harmony export */   "registerPage": () => (/* binding */ registerPage),
-/* harmony export */   "registerPassword": () => (/* binding */ registerPassword),
-/* harmony export */   "registerPasswordErr": () => (/* binding */ registerPasswordErr)
+/* harmony export */   "registerPasswordErr": () => (/* binding */ registerPasswordErr),
+/* harmony export */   "registerUsernameErr": () => (/* binding */ registerUsernameErr)
 /* harmony export */ });
 const registerBtn = document.getElementById("register-btn");
 const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
-const createChatBtn = document.getElementById("create-chat-btn");
-const completeCreateChatBtn = document.getElementById("complete-create-chat-btn");
+const createChatroomBtn = document.getElementById("create-chat-btn");
+const completeCreateChatroomBtn = document.getElementById("complete-create-chat-btn");
 const backBtns = [...document.querySelectorAll(".back-btn")];
 const registerPage = document.getElementById("register-page");
 const loginPage = document.getElementById("login-page");
 const chatroomsPage = document.getElementById("chatrooms-page");
 const chatPage = document.getElementById("chat-page");
-const createChatPage = document.getElementById("create-chat-page");
-const pages = [registerPage, loginPage, chatroomsPage, chatPage, createChatPage];
+const createChatroomPage = document.getElementById("create-chat-page");
+const pages = [registerPage, loginPage, chatroomsPage, chatPage, createChatroomPage];
 const registerForm = document.getElementById("register-form");
-const registerName = document.getElementById("register-name");
-const registerEmail = document.getElementById("register-email");
-const registerPassword = document.getElementById("register-password");
 const registerFormErr = document.getElementById("register-form-err");
-const registerNameErr = document.getElementById("register-name-err");
+const registerUsernameErr = document.getElementById("register-name-err");
 const registerEmailErr = document.getElementById("register-email-err");
 const registerPasswordErr = document.getElementById("register-password-err");
 const loginLink = document.getElementById("login-link");
 const loginForm = document.getElementById("login-form");
-const loginEmail = document.getElementById("login-email");
-const loginPassword = document.getElementById("login-password");
 const loginFormErr = document.getElementById("login-form-err");
 const loginEmailErr = document.getElementById("login-email-err");
 const loginPasswordErr = document.getElementById("login-password-err");
 const registerLink = document.getElementById("register-link");
+const createChatroomForm = document.getElementById("create-chat-form");
 const chatroomsList = document.getElementById("chatrooms-list");
 const messagesList = document.getElementById("messages-list");
 
@@ -32730,26 +32699,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./src/typescript/lib/constants.ts");
 /* harmony import */ var _firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../firebase/auth */ "./src/typescript/firebase/auth.ts");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./src/typescript/lib/router.ts");
+/* harmony import */ var _chatrooms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chatrooms */ "./src/typescript/lib/chatrooms.ts");
 
 
 
-_constants__WEBPACK_IMPORTED_MODULE_0__.registerForm === null || _constants__WEBPACK_IMPORTED_MODULE_0__.registerForm === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.registerForm.addEventListener("submit", (e) => {
+
+_constants__WEBPACK_IMPORTED_MODULE_0__.registerForm.addEventListener("submit", (e) => {
     (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_1__.register)(e);
 });
-_constants__WEBPACK_IMPORTED_MODULE_0__.loginForm === null || _constants__WEBPACK_IMPORTED_MODULE_0__.loginForm === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.loginForm.addEventListener("submit", (e) => {
+_constants__WEBPACK_IMPORTED_MODULE_0__.loginForm.addEventListener("submit", (e) => {
     (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_1__.login)(e);
 });
-_constants__WEBPACK_IMPORTED_MODULE_0__.logoutBtn === null || _constants__WEBPACK_IMPORTED_MODULE_0__.logoutBtn === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.logoutBtn.addEventListener("click", () => {
+_constants__WEBPACK_IMPORTED_MODULE_0__.logoutBtn.addEventListener("click", () => {
     (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_1__.logout)();
 });
-_constants__WEBPACK_IMPORTED_MODULE_0__.loginLink === null || _constants__WEBPACK_IMPORTED_MODULE_0__.loginLink === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.loginLink.addEventListener("click", () => {
+_constants__WEBPACK_IMPORTED_MODULE_0__.loginLink.addEventListener("click", () => {
     (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.loginPage);
 });
-_constants__WEBPACK_IMPORTED_MODULE_0__.registerLink === null || _constants__WEBPACK_IMPORTED_MODULE_0__.registerLink === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.registerLink.addEventListener("click", () => {
+_constants__WEBPACK_IMPORTED_MODULE_0__.registerLink.addEventListener("click", () => {
     (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.registerPage);
 });
-_constants__WEBPACK_IMPORTED_MODULE_0__.createChatBtn === null || _constants__WEBPACK_IMPORTED_MODULE_0__.createChatBtn === void 0 ? void 0 : _constants__WEBPACK_IMPORTED_MODULE_0__.createChatBtn.addEventListener("click", () => {
-    (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.createChatPage);
+_constants__WEBPACK_IMPORTED_MODULE_0__.createChatroomBtn.addEventListener("click", () => {
+    (0,_router__WEBPACK_IMPORTED_MODULE_2__.navigate)(_constants__WEBPACK_IMPORTED_MODULE_0__.createChatroomPage);
+});
+_constants__WEBPACK_IMPORTED_MODULE_0__.createChatroomForm.addEventListener("submit", (e) => {
+    (0,_chatrooms__WEBPACK_IMPORTED_MODULE_3__.createChatroom)(e);
 });
 _constants__WEBPACK_IMPORTED_MODULE_0__.backBtns.forEach((backBtn) => {
     backBtn === null || backBtn === void 0 ? void 0 : backBtn.addEventListener("click", () => {
@@ -32778,6 +32752,40 @@ const navigate = (destinationPage) => {
         if (page !== destinationPage)
             page === null || page === void 0 ? void 0 : page.classList.add("page--hidden");
     });
+};
+
+
+/***/ }),
+
+/***/ "./src/typescript/lib/validation.ts":
+/*!******************************************!*\
+  !*** ./src/typescript/lib/validation.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "validateEmail": () => (/* binding */ validateEmail),
+/* harmony export */   "validatePassword": () => (/* binding */ validatePassword),
+/* harmony export */   "validateUsername": () => (/* binding */ validateUsername)
+/* harmony export */ });
+const validateUsername = (username) => {
+    if (!username) {
+        return false;
+    }
+    return true;
+};
+const validateEmail = (email) => {
+    if (!email) {
+        return false;
+    }
+    return true;
+};
+const validatePassword = (password) => {
+    if (!password) {
+        return false;
+    }
+    return true;
 };
 
 
