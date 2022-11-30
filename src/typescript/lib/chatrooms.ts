@@ -28,6 +28,8 @@ export const renderChatroom = (id: string, data: any): void => {
         let targetChatroom = e.target as HTMLElement;
         getMessages(targetChatroom.innerText);
 
+        sessionStorage.setItem("currentChatroomId", targetChatroom.innerText);
+
         navigate(chatPage);
     });
 

@@ -17,6 +17,7 @@ import {
     Query,
     addDoc,
     onSnapshot,
+    orderBy,
 } from "firebase/firestore";
 // ------------------------------------------- //
 
@@ -27,30 +28,29 @@ export const db: Firestore = getFirestore(firebaseApp);
 let chatroomsRef: CollectionReference<DocumentData> = collection(db, "chatrooms");
 let messagesRef: CollectionReference<DocumentData> = collection(db, "messages");
 
-onSnapshot(chatroomsRef, (chatrooms) => {
-    chatroomsList.innerHTML = "";
+export const getChatrooms = async (): Promise<void> => {
+    const chatroomsSnapshot = onSnapshot(chatroomsRef, (chatrooms) => {
+        chatroomsList.innerHTML = "";
 
-    chatrooms.forEach((chatroom: QueryDocumentSnapshot<DocumentData>) => {
-        // console.log(chatroom.id, "=>", chatroom.data());
-        renderChatroom(chatroom.id, chatroom.data());
+        chatrooms.forEach((chatroom: QueryDocumentSnapshot<DocumentData>) => {
+            renderChatroom(chatroom.id, chatroom.data());
+        });
     });
-});
+};
 
 export const newChatroom = async (data: newChatroomData): Promise<void> => {
     await addDoc(chatroomsRef, data);
 };
 
 export const getMessages = async (chatroomId: string): Promise<void> => {
-    messagesList.innerHTML = "";
+    let queryStatement: Query<DocumentData> = query(messagesRef, where("chatroomId", "==", chatroomId), orderBy("timestamp"));
 
-    let queryStatement: Query<DocumentData> = query(messagesRef, where("chatroomId", "==", chatroomId));
+    const messagesSnapshot = onSnapshot(queryStatement, (messages) => {
+        messagesList.innerHTML = "";
 
-    const messages = await getDocs(queryStatement);
-
-    messages.forEach((message: QueryDocumentSnapshot<DocumentData>) => {
-        console.log(message.id, "=>", message.data());
-
-        renderMessage(message.data());
+        messages.forEach((message: QueryDocumentSnapshot<DocumentData>) => {
+            renderMessage(message.data());
+        });
     });
 };
 

@@ -240,6 +240,10 @@ a {
   border: none;
   background-color: transparent;
   outline: none;
+  color: var(--col-mid-gray);
+}
+.signup-form__input::placeholder {
+  color: var(--col-mid-gray);
 }
 .signup-form__input-icon {
   height: 20px;
@@ -302,9 +306,15 @@ a {
   display: none;
 }
 .chatrooms__chatroom-id {
-  display: none;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 .chatrooms__chat {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -423,6 +433,7 @@ a {
   margin-left: var(--space-md);
   flex: 1;
   width: 100%;
+  color: var(--col-dark-gray);
 }
 .chat input::placeholder {
   color: var(--col-light-gray);
@@ -448,13 +459,15 @@ a {
 }
 .create-chat__theme {
   display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.create-chat__theme-options {
+  display: flex;
   align-items: center;
   gap: var(--space-md);
 }
-.create-chat__theme:nth-child(1) {
-  opacity: 0.5;
-}
-.create-chat__theme input {
+.create-chat__theme-options input {
   display: grid;
   place-items: center;
   position: relative;
@@ -463,19 +476,19 @@ a {
   height: 2.25rem;
   border-radius: 50%;
 }
-.create-chat__theme input:nth-child(3)::before {
+.create-chat__theme-options input:nth-child(2)::before {
   background-color: var(--col-red);
 }
-.create-chat__theme input:nth-child(4)::before {
+.create-chat__theme-options input:nth-child(3)::before {
   background-color: var(--col-green);
 }
-.create-chat__theme input:nth-child(5)::before {
+.create-chat__theme-options input:nth-child(4)::before {
   background-color: var(--col-mid-purple);
 }
-.create-chat__theme input:checked {
+.create-chat__theme-options input:checked {
   border: 1px solid var(--col-mid-gray);
 }
-.create-chat__theme input::before {
+.create-chat__theme-options input::before {
   content: "";
   position: absolute;
   border-radius: 50%;
@@ -485,6 +498,7 @@ a {
 }
 .create-chat__icon {
   flex: 1;
+  opacity: 0;
 }
 .create-chat fieldset {
   border: none;
