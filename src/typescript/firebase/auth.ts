@@ -72,7 +72,7 @@ export const login = async (e: Event): Promise<void> => {
             console.log(userCredential);
 
             if (userCredential) {
-                loginForm?.reset();
+                loginForm.reset();
                 navigate(chatroomsPage);
             }
         } catch (error) {

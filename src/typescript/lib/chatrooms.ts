@@ -63,6 +63,7 @@ export const createChatroom = async (e: Event): Promise<void> => {
     };
 
     if (validateText(name) && validateText(theme)) {
+        createChatroomForm.reset();
         newChatroom(data);
         navigate(chatroomsPage);
     }
