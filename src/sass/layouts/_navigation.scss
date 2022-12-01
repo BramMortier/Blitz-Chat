@@ -3,7 +3,6 @@
 .navigation {
     display: flex;
     justify-content: space-between;
-    gap: var(--space-md);
     padding: var(--space-md) var(--space-md) 0 var(--space-md);
     margin-bottom: var(--space-lg);
 
@@ -12,6 +11,7 @@
     }
 
     &__icon {
+        margin-top: var(--space-xxs);
         height: 25px;
         width: 25px;
     }
@@ -28,6 +28,7 @@
         align-items: center;
         flex: 1;
         gap: var(--space-md);
+        margin-left: var(--space-md);
     }
 
     &__general-info {
@@ -40,5 +41,10 @@
         h4 {
             font-size: var(--text-md);
         }
+    }
+
+    &__btns {
+        display: flex;
+        align-items: center;
     }
 }

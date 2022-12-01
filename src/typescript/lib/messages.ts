@@ -1,12 +1,13 @@
 // ------------------------------------------- //
 // module imports
 import { Timestamp } from "firebase/firestore";
-import { newMessage } from "../firebase/database";
+import { newMessage, updateChatroom } from "../firebase/database";
 import { messageForm, messagesList } from "./constants";
+import { timestampFormat } from "./date_formatting";
 import { validateText } from "./validation";
 // ------------------------------------------- //
 
-export type newMessageData = {
+export type NewMessageData = {
     chatroomId: string;
     message: string;
     timestamp: Timestamp;
@@ -22,15 +23,13 @@ export const renderMessage = (data: any): void => {
         messageEl.classList.add("chat__message");
     }
 
-    let hours: string = data.timestamp.toDate().getHours();
-    let minutes: string = data.timestamp.toDate().getMinutes();
-
     messageEl.innerHTML = `
         <p class="chat__message-content">${data.message}</p>
-        <p class="chat__message-timestamp extra-subtle">${hours}h ${minutes}</p>
+        <p class="chat__message-timestamp extra-subtle">${timestampFormat(data.timestamp)}</p>
     `;
 
     messagesList.appendChild(messageEl);
+    updateChatroom(sessionStorage.getItem("currentChatroomId") as string, data);
 };
 
 export const sendMessage = async (e: Event): Promise<void> => {
@@ -38,7 +37,7 @@ export const sendMessage = async (e: Event): Promise<void> => {
 
     let message: string = messageForm.message.value;
 
-    let data: newMessageData = {
+    let data: NewMessageData = {
         chatroomId: sessionStorage.getItem("currentChatroomId") as string,
         message: message,
         timestamp: Timestamp.now(),

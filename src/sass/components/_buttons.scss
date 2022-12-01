@@ -11,9 +11,18 @@
     &--primary {
         background-color: var(--col-secondary);
     }
+
+    &--tertiary {
+        background-color: transparent;
+        padding: var(--space-xxs) var(--space-lg);
+        width: fit-content;
+        color: var(--col-white);
+        font-size: var(--text-sm);
+    }
 }
 
 .icon-btn {
+    position: relative;
     background-color: var(--col-dark-gray);
     border: none;
     outline: none;

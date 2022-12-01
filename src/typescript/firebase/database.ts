@@ -1,8 +1,8 @@
 // ------------------------------------------- //
 // module imports
 import { firebaseApp } from "./firebase";
-import { newChatroomData, renderChatroom } from "../lib/chatrooms";
-import { newMessageData, renderMessage } from "../lib/messages";
+import { NewChatroomData, renderChatroom } from "../lib/chatrooms";
+import { NewMessageData, renderMessage } from "../lib/messages";
 import { chatroomsList, messagesList } from "../lib/constants";
 import {
     Firestore,
@@ -10,15 +10,18 @@ import {
     collection,
     CollectionReference,
     DocumentData,
-    getDocs,
     query,
-    where,
-    QueryDocumentSnapshot,
     Query,
+    QueryDocumentSnapshot,
+    where,
+    orderBy,
     addDoc,
     onSnapshot,
-    orderBy,
+    updateDoc,
+    doc,
+    DocumentReference,
 } from "firebase/firestore";
+import { timestampFormat } from "../lib/date_formatting";
 // ------------------------------------------- //
 
 // Database init
@@ -38,7 +41,16 @@ export const getChatrooms = async (): Promise<void> => {
     });
 };
 
-export const newChatroom = async (data: newChatroomData): Promise<void> => {
+export const updateChatroom = async (chatroomId: string, data: any): Promise<void> => {
+    const chatroomRef: DocumentReference<DocumentData> = doc(db, "chatrooms", chatroomId);
+
+    await updateDoc(chatroomRef, {
+        lastMessage: data.message,
+        timeOfLastMessage: timestampFormat(data.timestamp),
+    });
+};
+
+export const newChatroom = async (data: NewChatroomData): Promise<void> => {
     await addDoc(chatroomsRef, data);
 };
 
@@ -54,6 +66,6 @@ export const getMessages = async (chatroomId: string): Promise<void> => {
     });
 };
 
-export const newMessage = async (data: newMessageData): Promise<void> => {
+export const newMessage = async (data: NewMessageData): Promise<void> => {
     await addDoc(messagesRef, data);
 };

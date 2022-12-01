@@ -35,8 +35,7 @@ export const renderChatroom = (id: string, data: any): void => {
 
     chatroomsList?.appendChild(chatroomEl);
 };
-
-export type newChatroomData = {
+export type NewChatroomData = {
     name: string;
     description: string;
     theme: string;
@@ -54,7 +53,7 @@ export const createChatroom = async (e: Event): Promise<void> => {
     if (!validateText(name)) createChatroomNameErr.innerHTML = "please fill in a name";
     if (!validateText(theme)) createChatroomThemeErr.innerHTML = "please choose a theme";
 
-    let data: newChatroomData = {
+    let data: NewChatroomData = {
         name: name,
         description: description,
         theme: theme,
