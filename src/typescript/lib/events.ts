@@ -17,8 +17,9 @@ import {
     googleAuthBtn,
     githubAuthBtn,
     facebookAuthBtn,
+    showPasswordBtns,
 } from "./constants";
-import { login, logout, register, signInWithGoogle } from "../firebase/auth";
+import { login, logout, register, signInWithGoogle, toggleShowPassword } from "../firebase/auth";
 import { navigate } from "./router";
 import { createChatroom } from "./chatrooms";
 import { sendMessage } from "./messages";
@@ -77,5 +78,11 @@ messageForm.addEventListener("submit", (e: Event): void => {
 backBtns.forEach((backBtn: HTMLElement): void => {
     backBtn.addEventListener("click", (): void => {
         navigate(chatroomsPage);
+    });
+});
+
+showPasswordBtns.forEach((showPasswordBtn) => {
+    showPasswordBtn.addEventListener("click", (e: Event) => {
+        toggleShowPassword(e);
     });
 });

@@ -40,6 +40,21 @@ auth.onAuthStateChanged((user: User): void => {
     }
 });
 
+export const toggleShowPassword = (e: Event): void => {
+    const targetBtn = e.target as HTMLImageElement;
+
+    const parent = targetBtn.parentElement as HTMLElement;
+    const input = parent.children[0] as HTMLElement;
+
+    if (input.getAttribute("type") == "password") {
+        input.setAttribute("type", "text");
+        targetBtn.src = `./images/icons/eye-open.svg`;
+    } else {
+        input.setAttribute("type", "password");
+        targetBtn.src = `./images/icons/eye-closed.svg`;
+    }
+};
+
 export const signInWithGoogle = async (): Promise<void> => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);

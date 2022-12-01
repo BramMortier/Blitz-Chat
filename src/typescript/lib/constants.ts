@@ -5,6 +5,7 @@ export const logoutBtn = document.getElementById("logout-btn") as HTMLElement;
 export const createChatroomBtn = document.getElementById("create-chat-btn") as HTMLElement;
 export const completeCreateChatroomBtn = document.getElementById("complete-create-chat-btn") as HTMLElement;
 export const backBtns = [...document.querySelectorAll(".back-btn")] as HTMLElement[];
+export const showPasswordBtns = [...document.querySelectorAll(".show-password-btn")] as HTMLElement[];
 
 export const googleAuthBtn = document.getElementById("google-auth-btn") as HTMLElement;
 export const githubAuthBtn = document.getElementById("github-auth-btn") as HTMLElement;
