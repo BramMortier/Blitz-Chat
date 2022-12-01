@@ -43,24 +43,25 @@
                         </div>
                     </div>
                     <button type="submit" id="register-btn" class="btn btn--primary">Register</button>
-                    <div class="signup-form__divider">
-                        <span></span>
-                        <p>or</p>
-                        <span></span>
-                    </div>
-                    <div class="signup-form__third-party-btns">
-                        <button class="icon-btn">
-                            <img src="./images/icons/google.svg" alt="google" />
-                        </button>
-                        <button class="icon-btn">
-                            <img src="./images/icons/facebook.svg" alt="facebook" />
-                        </button>
-                        <button class="icon-btn">
-                            <img src="./images/icons/github.svg" alt="github" />
-                        </button>
-                    </div>
-                    <p>Already have an account? <span id="login-link" class="link">login here</span></p>
                 </form>
+
+                <div class="signup-form__divider">
+                    <span></span>
+                    <p>or</p>
+                    <span></span>
+                </div>
+                <div class="signup-form__third-party-btns">
+                    <button id="google-auth-btn" class="icon-btn">
+                        <img src="./images/icons/google.svg" alt="google" />
+                    </button>
+                    <button id="github-auth-btn" class="icon-btn">
+                        <img src="./images/icons/facebook.svg" alt="facebook" />
+                    </button>
+                    <button id="facebook-auth-btn" class="icon-btn">
+                        <img src="./images/icons/github.svg" alt="github" />
+                    </button>
+                </div>
+                <p class="text-white">Already have an account? <span id="login-link" class="link">login here</span></p>
             </section>
             <!-- register pgae end -->
 
@@ -85,7 +86,7 @@
                         </div>
                     </div>
                     <button id="login-btn" class="btn btn--primary">Login</button>
-                    <p>Dont have an account? <span id="register-link" class="link">register here</span></p>
+                    <p class="text-white">Dont have an account? <span id="register-link" class="link">register here</span></p>
                 </form>
             </section>
             <!-- login pgae end -->
@@ -128,7 +129,7 @@
                             <div class="navigation__icon-placeholder"></div>
                         </div>
                         <div class="navigation__general-info">
-                            <h4 class="primary-font">The boyyss</h4>
+                            <h4 id="chatroom-name" class="primary-font">The boyyss</h4>
                             <p class="subtle bold">(<span id="chatroom-active-users">3</span>) active users</p>
                         </div>
                     </div>
