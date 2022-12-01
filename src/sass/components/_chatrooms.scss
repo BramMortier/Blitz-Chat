@@ -67,6 +67,11 @@
         h4 {
             font-size: var(--text-md);
         }
+
+        p {
+            overflow: hidden;
+            max-height: 1rem;
+        }
     }
 
     &__chat-status {
@@ -76,6 +81,7 @@
         justify-content: space-between;
         padding-block: var(--space-xxxs);
         height: 2.8rem;
+        min-width: 2.5rem;
 
         img {
             width: 1rem;
@@ -91,6 +97,7 @@
         background-color: var(--col-white);
 
         &::after {
+            pointer-events: none;
             position: absolute;
             content: "";
             top: -5rem;

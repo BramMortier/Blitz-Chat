@@ -1,7 +1,7 @@
 // ------------------------------------------- //
 // module imports
 import { firebaseApp } from "./firebase";
-import { NewChatroomData, renderChatroom } from "../lib/chatrooms";
+import { NewChatroomData, renderChatroom, renderChatroomInfo } from "../lib/chatrooms";
 import { NewMessageData, renderMessage } from "../lib/messages";
 import { chatroomsList, messagesList } from "../lib/constants";
 import {
@@ -20,6 +20,7 @@ import {
     updateDoc,
     doc,
     DocumentReference,
+    getDoc,
 } from "firebase/firestore";
 import { timestampFormat } from "../lib/date_formatting";
 // ------------------------------------------- //
@@ -41,6 +42,13 @@ export const getChatrooms = async (): Promise<void> => {
     });
 };
 
+export const getChatroomInfo = async (chatroomId: string): Promise<void> => {
+    const chatroomRef: DocumentReference<DocumentData> = doc(db, "chatrooms", chatroomId);
+
+    const chatroom = await getDoc(chatroomRef);
+    renderChatroomInfo(chatroom.data());
+};
+
 export const updateChatroom = async (chatroomId: string, data: any): Promise<void> => {
     const chatroomRef: DocumentReference<DocumentData> = doc(db, "chatrooms", chatroomId);
 
@@ -50,12 +58,20 @@ export const updateChatroom = async (chatroomId: string, data: any): Promise<voi
     });
 };
 
+export const updateChatroomUsers = async (chatroomId: string, amount: number): Promise<void> => {
+    const chatroomRef: DocumentReference<DocumentData> = doc(db, "chatrooms", chatroomId);
+
+    await updateDoc(chatroomRef, {
+        activeUsers: amount,
+    });
+};
+
 export const newChatroom = async (data: NewChatroomData): Promise<void> => {
     await addDoc(chatroomsRef, data);
 };
 
 export const getMessages = async (chatroomId: string): Promise<void> => {
-    let queryStatement: Query<DocumentData> = query(messagesRef, where("chatroomId", "==", chatroomId), orderBy("timestamp"));
+    const queryStatement: Query<DocumentData> = query(messagesRef, where("chatroomId", "==", chatroomId), orderBy("timestamp"));
 
     const messagesSnapshot = onSnapshot(queryStatement, (messages) => {
         messagesList.innerHTML = "";

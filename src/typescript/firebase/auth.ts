@@ -1,6 +1,15 @@
 // ------------------------------------------- //
 // module imports
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, UserCredential, User } from "firebase/auth";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    Auth,
+    UserCredential,
+    User,
+    GoogleAuthProvider,
+    signInWithPopup,
+} from "firebase/auth";
 import { validateEmail, validateUsername, validatePassword } from "../lib/validation";
 import { navigate } from "../lib/router";
 import {
@@ -31,6 +40,11 @@ auth.onAuthStateChanged((user: User): void => {
     }
 });
 
+export const signInWithGoogle = async (): Promise<void> => {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider);
+};
+
 export const register = async (e: Event): Promise<void> => {
     e.preventDefault();
 
@@ -45,7 +59,6 @@ export const register = async (e: Event): Promise<void> => {
     if (validateUsername(username) && validateEmail(email) && validatePassword(password)) {
         try {
             let userCredential: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(userCredential);
 
             if (userCredential) {
                 registerForm.reset();

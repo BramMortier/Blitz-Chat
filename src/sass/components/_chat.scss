@@ -28,12 +28,28 @@
         align-items: flex-start;
         gap: var(--space-md);
         width: 100%;
+
+        &--red .chat__message--owned .chat__message-content {
+            background-color: var(--col-red);
+            color: var(--col-white);
+        }
+
+        &--green .chat__message--owned .chat__message-content {
+            background-color: var(--col-green);
+            color: var(--col-white);
+        }
+
+        &--purple .chat__message--owned .chat__message-content {
+            background-color: var(--col-mid-purple);
+            color: var(--col-white);
+        }
     }
 
     &__message {
         max-width: 60%;
 
         &--owned {
+            max-width: 60%;
             align-self: flex-end;
             text-align: right;
 

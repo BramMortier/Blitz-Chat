@@ -65,5 +65,5 @@ module.exports = {
             filename: "bundle.css",
         }),
     ],
-    mode: "production",
+    mode: "development",
 };

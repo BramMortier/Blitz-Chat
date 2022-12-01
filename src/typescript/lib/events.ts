@@ -14,8 +14,11 @@ import {
     logoutBtn,
     createChatroomForm,
     messageForm,
+    googleAuthBtn,
+    githubAuthBtn,
+    facebookAuthBtn,
 } from "./constants";
-import { login, logout, register } from "../firebase/auth";
+import { login, logout, register, signInWithGoogle } from "../firebase/auth";
 import { navigate } from "./router";
 import { createChatroom } from "./chatrooms";
 import { sendMessage } from "./messages";
@@ -40,6 +43,20 @@ loginLink.addEventListener("click", (): void => {
 
 registerLink.addEventListener("click", (): void => {
     navigate(registerPage);
+});
+
+// Auth provider events
+googleAuthBtn.addEventListener("click", (): void => {
+    console.log("google auth popup");
+    signInWithGoogle();
+});
+
+githubAuthBtn.addEventListener("click", (): void => {
+    console.log("github auth popup");
+});
+
+facebookAuthBtn.addEventListener("click", (): void => {
+    console.log("facebook auth popup");
 });
 
 // chatroom events

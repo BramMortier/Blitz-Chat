@@ -6,6 +6,10 @@ export const createChatroomBtn = document.getElementById("create-chat-btn") as H
 export const completeCreateChatroomBtn = document.getElementById("complete-create-chat-btn") as HTMLElement;
 export const backBtns = [...document.querySelectorAll(".back-btn")] as HTMLElement[];
 
+export const googleAuthBtn = document.getElementById("google-auth-btn") as HTMLElement;
+export const githubAuthBtn = document.getElementById("github-auth-btn") as HTMLElement;
+export const facebookAuthBtn = document.getElementById("facebook-auth-btn") as HTMLElement;
+
 // app pages
 export const registerPage = document.getElementById("register-page") as HTMLElement;
 export const loginPage = document.getElementById("login-page") as HTMLElement;
@@ -48,6 +52,8 @@ export const messageForm = document.getElementById("message-form") as HTMLFormEl
 export const chatroomsList = document.getElementById("chatrooms-list") as HTMLElement;
 
 // chat page elements
+export const activeChatroomUsers = document.getElementById("chatroom-active-users") as HTMLElement;
+export const chatroomName = document.getElementById("chatroom-name") as HTMLElement;
 export const messagesList = document.getElementById("messages-list") as HTMLElement;
 
 // regular expressions

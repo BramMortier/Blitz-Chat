@@ -1,7 +1,17 @@
 // ------------------------------------------- //
 // module imports
-import { getMessages, newChatroom } from "../firebase/database";
-import { chatPage, chatroomsList, chatroomsPage, createChatroomForm, createChatroomNameErr, createChatroomThemeErr } from "./constants";
+import { getChatroomInfo, getMessages, newChatroom } from "../firebase/database";
+import {
+    activeChatroomUsers,
+    chatPage,
+    chatroomName,
+    chatroomsList,
+    chatroomsPage,
+    createChatroomForm,
+    createChatroomNameErr,
+    createChatroomThemeErr,
+    messagesList,
+} from "./constants";
 import { navigate } from "./router";
 import { validateText } from "./validation";
 // ------------------------------------------- //
@@ -27,6 +37,7 @@ export const renderChatroom = (id: string, data: any): void => {
     chatroomEl?.addEventListener("click", (e: Event): void => {
         let targetChatroom = e.target as HTMLElement;
         getMessages(targetChatroom.innerText);
+        getChatroomInfo(targetChatroom.innerText);
 
         sessionStorage.setItem("currentChatroomId", targetChatroom.innerText);
 
@@ -35,8 +46,19 @@ export const renderChatroom = (id: string, data: any): void => {
 
     chatroomsList?.appendChild(chatroomEl);
 };
+
+export const renderChatroomInfo = (data: any): void => {
+    messagesList.className = "";
+    messagesList.classList.add("chat__messages", `chat__messages--${data.theme}`);
+
+    chatroomName.innerHTML = data.name;
+    activeChatroomUsers.innerHTML = data.activeUsers;
+};
+
 export type NewChatroomData = {
     name: string;
+    activeUsers: number;
+    adminUser: string;
     description: string;
     theme: string;
     lastMessage: string;
@@ -55,9 +77,11 @@ export const createChatroom = async (e: Event): Promise<void> => {
 
     let data: NewChatroomData = {
         name: name,
+        activeUsers: 0,
+        adminUser: sessionStorage.getItem("userId") as string,
         description: description,
         theme: theme,
-        lastMessage: "",
+        lastMessage: "No messages send yet",
         timeOfLastMessage: "",
     };
 
