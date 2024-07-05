@@ -1,5 +1,9 @@
 # Blitz chat app
 
+![Blitz Chat](https://github.com/BramMortier/Blitz-Chat/assets/79015250/1d4ed024-b5f1-486b-a096-f0f979177bdb)
+
+![Blitz Chat-3](https://github.com/BramMortier/Blitz-Chat/assets/79015250/90a6adcf-b1bc-48eb-9a60-107ac7ce93e0)
+
 # Table of contents
 
 1. [Introduction](#introduction)
